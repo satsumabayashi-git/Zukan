@@ -1,0 +1,9 @@
+<h1>投稿一覧</h1>
+<% @posts.each do |post| %>
+  <div>
+    <%= image_tag post.get_image %>
+    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+    <p>本文：<%= post.body %></p>
+    <p>ユーザーネーム：<%= post.user.name %></p>
+  </div>
+<% end %>
