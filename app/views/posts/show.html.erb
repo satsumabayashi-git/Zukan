@@ -22,3 +22,36 @@
     <%= link_to "削除", post_path(@post.id), method: :delete %>
   <% end %>
 </div>
+
+<div>
+  <% if @post.bookmarked_by?(current_user) %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        ♥<%= @post.bookmarks.count %> ブックマーク
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        ♡<%= @post.bookmarks.count %> ブックマーク
+      <% end %>
+    </p>
+  <% end %>
+
+  <p>コメント件数：<%= @post.post_comments.count %></p>
+  <% @post.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if current_user == post_comment.user %>
+      <%= link_to "削除", post_post_comment_path(post_comment.id), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@post, @post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

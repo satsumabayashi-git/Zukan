@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  
   belongs_to :user
+  has_many :post_comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   def get_image(width, height)
     unless image.attached?
@@ -8,6 +11,10 @@ class Post < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def bookmarked_by?(user)
+    bookmarks.exists?(user_id: user.id)
   end
 
 end
