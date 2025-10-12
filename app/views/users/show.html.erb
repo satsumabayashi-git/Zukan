@@ -5,6 +5,14 @@
 <p>
   ユーザーネーム：<%= @user.name %>
 </p>
+<p>
+  自己紹介：<%= @user.introduction %>
+</p>
+<p>
+  好きな動物：<%= @user.favorite_animal %>
+</p>
+
+<p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
 
 <% @posts.each do |post| %>
   <div>

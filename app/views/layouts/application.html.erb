@@ -12,30 +12,39 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-        <li>
-          <%= link_to "新規投稿", new_post_path %>
-        </li>
-        <li>
-          <%= link_to "投稿一覧", posts_path %>
-        </li>
-        <li>
-          <%= link_to "ユーザー一覧（管理者）", users_path %>
-        </li>
-        <li>
-          <%= link_to "マイページ", user_path(current_user.id) %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
+      <h1 class="heading">
+        動物図鑑
+      </h1>
+      <nav>
+         <ul class="nav-list">
+          <% if user_signed_in? %>
+            <li class="nav-list-item">
+              <%= link_to "TOP", posts_path %>
+            </li>
+            <li class="nav-list-item">
+              <%= link_to "新規投稿", new_post_path %>
+            </li>
+            <li class="nav-list-item">
+              <%= link_to "ユーザー一覧（管理者）", users_path %>
+            </li>
+            <li class="nav-list-item">
+              <%= link_to "マイページ", user_path(current_user.id) %>
+            </li>
+            <li class="nav-list-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </li>
+          <% else %>
+            <li class="nav-list-item">
+              <%= link_to "新規登録", new_user_registration_path %>
+            </li>
+            <li class="nav-list-item">
+              <%= link_to "ログイン", new_user_session_path %>
+            </li>
+          <% end %>
+         </ul>
+        </nav>
+
+        
     </header>
     <%= yield %>
   </body>
