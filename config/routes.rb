@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
-  get 'users/edit'
+  # get 'users/index'
+  # get 'users/show'
+  # get 'users/edit'
   devise_for :users
   root to: 'homes#top'
   get 'home/about' => 'homes#about', as: 'about'
@@ -11,4 +11,13 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
   end
   resources :users, only: [:index, :show, :edit, :update]
+
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+  end
 end

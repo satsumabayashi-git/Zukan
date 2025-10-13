@@ -1,9 +1,14 @@
 class Post < ApplicationRecord
   has_one_attached :image
-  
+
   belongs_to :user
+  belongs_to :category
   has_many :post_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+
+  validates :image, presence: true
+  validates :body, presence: true
+  validates :category_id, presence: true
 
   def get_image(width, height)
     unless image.attached?
@@ -14,7 +19,9 @@ class Post < ApplicationRecord
   end
 
   def bookmarked_by?(user)
-    bookmarks.exists?(user_id: user.id)
+    if user.present?
+      bookmarks.exists?(user_id: user.id)
+    end
   end
 
 end

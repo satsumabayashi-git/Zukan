@@ -16,7 +16,7 @@
         動物図鑑
       </h1>
       <nav>
-         <ul class="nav-list">
+        <ul class="nav-list">
           <% if user_signed_in? %>
             <li class="nav-list-item">
               <%= link_to "TOP", posts_path %>
@@ -35,17 +35,21 @@
             </li>
           <% else %>
             <li class="nav-list-item">
+              <%= link_to "TOP", posts_path %>
+            </li>
+            <li class="nav-list-item">
               <%= link_to "新規登録", new_user_registration_path %>
             </li>
             <li class="nav-list-item">
               <%= link_to "ログイン", new_user_session_path %>
             </li>
           <% end %>
-         </ul>
-        </nav>
-
-        
+        </ul>
+      </nav>
     </header>
+    <% flash.each do |message_type, message| %>
+      <div class="flash-message <%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
