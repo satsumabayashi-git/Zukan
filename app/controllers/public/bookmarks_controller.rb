@@ -1,4 +1,4 @@
-class BookmarksController < ApplicationController
+class Public::BookmarksController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
