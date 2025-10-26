@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   validates :image, presence: true
   validates :body, presence: true
-  validates :category_id, presence: true
+  # validates :category_id, presence: true
 
   def get_image(width, height)
     unless image.attached?
