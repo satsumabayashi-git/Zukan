@@ -21,6 +21,7 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path
     else
       flash.now[:alert] = "投稿に失敗しました"
+      @categorys = Category.all
       render :new
     end
   end
@@ -37,7 +38,7 @@ class Public::PostsController < ApplicationController
 private
 
 def post_params
-  params.require(:post).permit(:body, :image, :date, :place)
+  params.require(:post).permit(:body, :image, :date, :place, :category_id)
 end
 
 end
