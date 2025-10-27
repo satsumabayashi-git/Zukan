@@ -22,10 +22,10 @@ Aruma = User.find_or_create_by!(email: "Aruma@example.com") do |user|
   user.favorite_animal = "ペリカン"
 end
 
-Nyaan = User.find_or_create_by!(email: "nyaan@example.com") do |user|
-  user.name = "ニャーン"
-  user.password = "password"
-  user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
-  user.introduction = "かわいい動物が大好きです！"
-  user.favorite_animal = "サーバル"
-end
+# Nyaan = User.find_or_create_by!(email: "nyaan@example.com") do |user|
+#   user.name = "ニャーン"
+#   user.password = "password"
+#   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
+#   user.introduction = "かわいい動物が大好きです！"
+#   user.favorite_animal = "サーバル"
+# end
