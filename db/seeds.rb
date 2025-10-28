@@ -6,6 +6,30 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Category.find_or_create_by!(name: "不明") do |post|
+  
+end
+
+Category.find_or_create_by!(name: "昆虫・その他の虫") do |post|
+  
+end
+
+Category.find_or_create_by!(name: "鳥類") do |post|
+  
+end
+
+Category.find_or_create_by!(name: "魚類・水中の生物") do |post|
+  
+end
+
+Category.find_or_create_by!(name: "爬虫類・両生類") do |post|
+  
+end
+
+Category.find_or_create_by!(name: "哺乳類") do |post|
+  
+end
+
 Kabutomaru = User.find_or_create_by!(email: "kabutomaru@example.com") do |user|
   user.name = "かぶと丸"
   user.password = "password"
@@ -54,35 +78,10 @@ Post.find_or_create_by!(body: "路地裏でタヌキ？を見かけました！�
   post.category_id = 6
 end
 
-# Category.find_or_create_by!(name: "不明") do |post|
-  
-# end
-
-# Category.find_or_create_by!(name: "昆虫・その他の虫") do |post|
-  
-# end
-
-# Category.find_or_create_by!(name: "鳥類") do |post|
-  
-# end
-
-# Category.find_or_create_by!(name: "魚類・水中の生物") do |post|
-  
-# end
-
-# Category.find_or_create_by!(name: "爬虫類・両生類") do |post|
-  
-# end
-
-# Category.find_or_create_by!(name: "哺乳類") do |post|
-  
-# end
-
-# bookmarks = Bookmark.create!(
-#   [
-#     {user_id: 2, post_id: 1},
-#     {user_id: 2, post_id: 3},
-#     {user_id: 3, post_id: 1},
-#   ]
-# )
-# end
+bookmarks = Bookmark.create!(
+  [
+    {user_id: 2, post_id: 1},
+    {user_id: 2, post_id: 3},
+    {user_id: 3, post_id: 1},
+  ]
+)

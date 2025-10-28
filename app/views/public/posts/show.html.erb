@@ -1,6 +1,7 @@
 <h1>投稿詳細</h1>
 
 <div>
+  <p>カテゴリー：<%= @post.category.name %></p>
   <%= image_tag @post.get_image(500,200) %>
 
   <p>本文：<%= @post.body %></p>
