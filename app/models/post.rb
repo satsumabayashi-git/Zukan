@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   # belongs_to :category
   has_many :post_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   validates :image, presence: true
   validates :body, presence: true
