@@ -5,6 +5,13 @@
 
 <h1>投稿一覧</h1>
 <div>
+  <!-- ソートボタン -->
+  <%= link_to "新着順", posts_path(latest: "true") %>
+  <%= link_to "古い順", posts_path(old: "true") %>
+  <%= link_to "ブックマーク順", posts_path(bookmark_count: "true") %> 
+</div>
+
+<div>
   <table class="post-index">
     <thead>
       <tr>
@@ -35,6 +42,7 @@
          <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
         </td>
         <td>
+        <!-- ブックマーク表示 -->
         <% if post.bookmarked_by?(current_user) %>
           <p>
             <%= link_to post_bookmarks_path(post), method: :delete do %>

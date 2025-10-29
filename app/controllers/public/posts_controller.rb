@@ -5,7 +5,16 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    if params[:latest]
+      @posts = Post.latest
+    elsif params[:old]
+      @posts = Post.old
+    elsif params[:bookmark_count]
+      posts = Post.all
+      @posts = posts.sort_by { |post| post.bookmarks.count }.reverse!
+    else
+      @posts = Post.all
+    end
   end
 
   def show

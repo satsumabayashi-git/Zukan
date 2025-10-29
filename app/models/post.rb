@@ -11,6 +11,9 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :category_id, presence: true
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
