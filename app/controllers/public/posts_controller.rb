@@ -5,15 +5,13 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    if params[:latest]
-      @posts = Post.latest
-    elsif params[:old]
-      @posts = Post.old
+    if  params[:old]
+      @posts = Post.old.page(params[:page])
     elsif params[:bookmark_count]
-      posts = Post.all
-      @posts = posts.sort_by { |post| post.bookmarks.count }.reverse!
+      my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
+      @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
     else
-      @posts = Post.all.reverse
+      @posts = Post.latest.page(params[:page])
     end
   end
 
