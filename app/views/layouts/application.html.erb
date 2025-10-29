@@ -31,6 +31,9 @@
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="nav-list-item">
+              <%= link_to "ブックマーク", bookmarked_path %>
+            </li>
+            <li class="nav-list-item">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
             <!-- 検索ボタン -->

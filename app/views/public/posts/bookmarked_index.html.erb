@@ -1,0 +1,19 @@
+<h2>ブックマーク一覧</h2>
+
+<div>
+  <!-- ソートボタン -->
+  <%= link_to "追加日新しい順", bookmarked_path %>
+  <%= link_to "追加日古い順", bookmarked_path(bookmarked_old: "true") %>
+  <%= link_to "投稿日新着順", bookmarked_path(latest: "true") %>
+  <%= link_to "投稿日古い順", bookmarked_path(old: "true") %> 
+</div>
+
+<table>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

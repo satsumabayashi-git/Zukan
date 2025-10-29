@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'home/about' => 'homes#about', as: 'about'
     get 'search' => 'searches#search', as: 'search'
+    get 'post/bookmarked_index' => 'posts#bookmarked_index', as: 'bookmarked'
     resources :posts, only: [:new, :create, :index, :show, :destroy] do
       resources :post_comments, only: [:create, :destroy]
       resource :bookmark, only: [:create, :destroy]
