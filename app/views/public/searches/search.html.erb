@@ -1,21 +1,43 @@
 <h2>検索結果</h2>
-
-<table>
+<div class="container py-5">
   <% if @range == "User" %>
-    <tbody>
+    <div class="row">
       <% @users.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-        </tr>
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            <%= user.name %>
+          </div>
+          <%= link_to user_path(user.id), class:"mx-auto" do %>
+            <%= image_tag user.get_profile_image(100, 100), class:"rounded circle" %>
+          <% end %> 
+          <div class="card-body">
+            <p class="card-text"><%= user.introduction %></p>
+          </div>
+          <div class="card-body">
+            <p class="card-text">好きな動物：<br><%= user.favorite_animal %></p>
+          </div>
+        </div>
       <% end %>
-    </tbody>
+    </div>
+    <%= paginate @users %>
   <% else %>
-    <tbody>
+    <div class="row">
       <% @posts.each do |post| %>
-        <tr>
-          <td><%= post.body %></td>
-        </tr>
+        <div class="card" style="width: 15rem;">
+          <%= link_to post_path(post.id), class:"mx-auto" do %>
+            <%= image_tag post.get_image(200, 200), class:"card-img-top rounded" %>
+          <% end %> 
+          <div class="card-body">
+            <p class="card-text"><%= post.body %></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= post.category.name %></li>
+              <li class="list-group-item"><%= post.date %></li>
+              <li class="list-group-item"><%= post.place %></li>
+            </ul>
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  <% end %> 
-</table>
+    </div>
+    <%= paginate @posts %>
+  <% end %>
+</div>

@@ -4,9 +4,11 @@ class Public::SearchesController < ApplicationController
     @range = params[:range]
     word = params[:word]
     if @range == "User"
-      @users = User.where("name LIKE? OR introduction LIKE? OR favorite_animal LIKE?", "%#{word}%", "%#{word}%", "%#{word}%")
+      my_array_object = User.where("name LIKE? OR introduction LIKE? OR favorite_animal LIKE?", "%#{word}%", "%#{word}%", "%#{word}%")
+      @users = Kaminari.paginate_array(my_array_object).page(params[:page])
     else
-      @posts = Post.where("body LIKE? OR place LIKE? OR date LIKE?", "%#{word}%", "%#{word}%", "%#{word}%")
+      my_array_object = Post.where("body LIKE? OR place LIKE? OR date LIKE?", "%#{word}%", "%#{word}%", "%#{word}%")
+      @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
     end
   end
   
