@@ -35,10 +35,10 @@
             </li>
             <!-- 検索ボタン -->
             <div>
-              <%= form_with url:search_path, local: true, method: :get do |f| %>
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
                 <%= f.text_field :word %>
                 <%= f.select :range, options_for_select([['User'], ['Post']]) %>
-                <%= f.submit "検索", class: "btn btn-primary" %>
+                <%= f.submit '検索', class: "btn btn-primary" %>
               <% end %>
             </div>
           <% else %>
