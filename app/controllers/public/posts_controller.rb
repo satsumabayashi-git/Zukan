@@ -46,14 +46,15 @@ class Public::PostsController < ApplicationController
     bookmarks = current_user.bookmarks
     bookmarked_posts = Post.where(id: [bookmarks.pluck(:post_id)])
     if params[:latest]
-      @posts =  bookmarked_posts.latest
+      my_array_object =  bookmarked_posts.latest
     elsif params[:old]
-      @posts =  bookmarked_posts.old
+      my_array_object =  bookmarked_posts.old
     elsif params[:bookmarked_old]
-      @posts =  bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }
+      my_array_object = bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }
     else
-      @posts = bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }.reverse
+      my_array_object = bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }.reverse
     end
+    @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
   end
 
 private

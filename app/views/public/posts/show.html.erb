@@ -1,78 +1,117 @@
 <h1>投稿詳細</h1>
+<div class="container py-5">
 
-<div>
-  <p>カテゴリー：<%= @post.category.name %></p>
-  <%= image_tag @post.get_image(500,200) %>
-
-  <p>本文：<%= @post.body %></p>
-  <p>日時：<%= @post.date %></p>
-  <p>場所：<%= @post.place %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if current_user == @post.user %>
-    <%= link_to "削除", post_path(@post.id), method: :delete %>
-  <% end %>
-
-  <div>
-    <% if @post.bookmarked_by?(current_user) %>
-      <p>
-        <%= link_to post_bookmark_path(@post), method: :delete do %>
-          ♥<%= @post.bookmarks.count %> ブックマーク
-        <% end %>
-      </p>
-    <% else %>
-      <p>
-        <%= link_to post_bookmark_path(@post), method: :post do %>
-          ♡<%= @post.bookmarks.count %> ブックマーク
-        <% end %>
-      </p>
-    <% end %>
+  <div class="d-flex justify-content-end">
+    <button class="btn-outline-info">
+      <%= @post.category.name %>
+    </button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= image_tag @post.get_image(500,500), class: "rounded"; %>
   </div>
 
-  <div>
-    <!-- コメント表示 -->
-    <p>コメント件数：<%= @post.post_comments.count %></p>
-    <% @post.post_comments.each do |post_comment| %>
-      <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-      <%= post_comment.user.name %>
-      <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-      <% if current_user == post_comment.user %>
-        <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<br>
-<hr>
-<br>
-<div>
-  <p>
-    投稿ユーザー画像：
-    <%= link_to user_path(@post.user.id) do %>
-      <%= image_tag @post.user.get_profile_image(100, 100) %>
-    <% end %>
-  </p>
-  <p>
-    ユーザーネーム：
-    <%= link_to user_path(@post.user.id) do %>
+  <div class="row m-3">
+    <%= link_to user_path(@post.user.id), class: "col-md-4" do %>
+      <%= image_tag @post.user.get_profile_image(100, 100), class: "rounded-circle" %>
       <%= @post.user.name %>
     <% end %>
-  </p>
+    <!-- ブックマークとコメント件数 -->
+    <span class="col-md-1 offset-md-5 align-self-end">
+      <% if @post.bookmarked_by?(current_user) %>
+        <%= link_to post_bookmark_path(@post), method: :delete do %>
+          <%= @post.bookmarks.count %> <i class="fa-solid fa-star"></i>
+        <% end %>
+      <% else %>
+        <%= link_to post_bookmark_path(@post), method: :post do %>
+          <%= @post.bookmarks.count %> <i class="fa-regular fa-star"></i>
+        <% end %>
+      <% end %>
+    </span>
+    <span class="col-md-1 align-self-end">
+      <%= @post.post_comments.count %> <i class="fa-regular fa-message"></i>
+    </span>
+    <span class="col-md-1 align-self-end">
+      <% if current_user == @post.user %>
+        <%= link_to "削除", post_path(@post.id), class: "my-3 btn btn-outline-danger", method: :delete %>
+      <% end %>
+    </span>
+  </div>
+
+  <!-- 投稿データ -->
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>
+          本文
+        </th>
+        <th>
+          <%= @post.body %>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          日時
+        </th>
+        <th>
+          <%= @post.date %>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          場所
+        </th>
+        <th>
+          <%= @post.place %>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          投稿日
+        </th>
+        <th>
+          <%= @post.created_at.strftime('%Y/%m/%d') %>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 返信一覧 -->
+  <div class="mt-5">
+    <% @post.post_comments.each do |post_comment| %>
+      <span><%= post_comment.user.name %></span>
+      <div class="row d-flex align-items-end">
+        <div class="col">
+          <%= image_tag post_comment.user.get_profile_image(70,70) %>
+        </div>
+        <div class="col-9">
+          <%= post_comment.comment %>
+        </div>
+        <div class="col">
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        </div>
+        <div class="col">
+          <% if current_user == post_comment.user %>
+            <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
+  <div class="mt-5 d-flex justify-content-center">
+    <%= form_with model: [@post, @post_comment] do |f| %>
+      <%= f.text_area :comment, rows: '3',class: "form-control" %>
+      <%= f.submit "コメントする" %>
+    <% end %>
+  </div>
 </div>
-<br>
-<hr>
-<br>
+
 <!-- 円グラフ -->
 <div>
   <!--
     <%= pie_chart @post.votes.group(:opinion).count %>
   -->
-</div>
-
-<div>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
 </div>
 
 

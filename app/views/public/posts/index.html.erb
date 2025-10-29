@@ -1,66 +1,18 @@
-<h2>
-”なんでもソーシャル生き物図鑑”にようこそ！
-ここは生き物の写真を投稿して、生き物に関する知識を広めていくコミュニティサイトです。
-</h2>
-
 <h1>投稿一覧</h1>
-<div>
-  <!-- ソートボタン -->
-  <%= link_to "新着順", posts_path(latest: "true") %>
-  <%= link_to "古い順", posts_path(old: "true") %>
-  <%= link_to "ブックマーク順", posts_path(bookmark_count: "true") %> 
+<hr>
+
+<div class="container py-5">
+  <h3 class="mb-5 text-center">
+  ”なんでもソーシャル生き物図鑑”にようこそ！
+  ここは生き物の写真を投稿して、<br>生き物に関する知識を広めていくコミュニティサイトです。
+  </h3>
+  <div>
+    <!-- ソートボタン -->
+    <ul class="nav justify-content-end">
+    <li class="nav-item"><%= link_to "新着順", posts_path(latest: "true"), class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to "古い順", posts_path(old: "true"), class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to "ブックマーク順", posts_path(bookmark_count: "true"), class: "nav-link" %> </li>
+    </ul>
+  </div>
+  <%= render 'list', posts: @posts %>
 </div>
-
-<div>
-  <table class="post-index">
-    <thead>
-      <tr>
-        <th>ユーザー画像</th>
-        <th>画像</th>
-        <th>本文</th>
-        <th>コメント件数</th>
-        <th>ブックマーク</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @posts.each do |post| %>
-      <tr>
-        <td>
-        <%= link_to user_path(post.user.id) do %>
-          <%= image_tag post.user.get_profile_image(40, 40) %>
-        <% end %>
-        </td>
-        <td>
-          <%= link_to post_path(post.id) do %>
-            <%= image_tag post.get_image(200,200) %>
-          <% end %>
-        </td>
-        <td>
-          <%= post.body %>
-        </td>
-        <td>
-         <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
-        </td>
-        <td>
-        <!-- ブックマーク表示 -->
-        <% if post.bookmarked_by?(current_user) %>
-          <p>
-            <%= link_to post_bookmark_path(post), method: :delete do %>
-              ♥<%= post.bookmarks.count %>
-            <% end %>
-          </p>
-        <% else %>
-          <p>
-            <%= link_to post_bookmark_path(post), method: :post do %>
-              ♡<%= post.bookmarks.count %>
-            <% end %>
-          </p>
-        <% end %>
-        </td>
-      </tr>
-      <% end %> 
-    </tbody>
-  </table>
-<div>
-
-<%= paginate @posts %>

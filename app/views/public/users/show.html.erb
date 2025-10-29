@@ -1,28 +1,37 @@
 <h1>ユーザー詳細</h1>
-<p>
-  ユーザー画像：<%= image_tag @user.get_profile_image(100, 100) %>
-</p>
-<p>
-  ユーザーネーム：<%= @user.name %>
-</p>
-<p>
-  自己紹介：<%= @user.introduction %>
-</p>
-<p>
-  好きな動物：<%= @user.favorite_animal %>
-</p>
-
-<p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
-
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image(100,100) %>
-    <% end %>
-    <p>
-    投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100, 100) %>
-    </p>
-    <p>本文：<%= post.body %></p>
-    <p>ユーザーネーム：<%= post.user.name %></p>
+<div class="container py-5">
+  <%= image_tag @user.get_profile_image(100, 100), class: "rounded-circle"; %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>
+          名前
+        </th>
+        <th>
+          <%= @user.name %>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          自己紹介
+        </th>
+        <th>
+          <%= @user.introduction %>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          好きな動物
+        </th>
+        <th>
+          <%= @user.favorite_animal %>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-3 mb-5">
+    <%= link_to "プロフィール編集", edit_user_path(@user.id), class: "btn btn-primary" %>
   </div>
-<% end %>
+
+  <%= render 'public/posts/list', posts: @posts %>
+</div>
