@@ -1,0 +1,9 @@
+<h1>投稿一覧</h1>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= image_tag post.get_image(200,200) %> - <%= post.body %> 
+      <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    </li>
+  <% end %>
+</ul>
