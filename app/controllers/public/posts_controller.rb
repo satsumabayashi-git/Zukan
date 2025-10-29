@@ -13,7 +13,7 @@ class Public::PostsController < ApplicationController
       posts = Post.all
       @posts = posts.sort_by { |post| post.bookmarks.count }.reverse!
     else
-      @posts = Post.all
+      @posts = Post.all.reverse
     end
   end
 

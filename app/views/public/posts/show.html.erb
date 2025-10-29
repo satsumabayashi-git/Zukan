@@ -15,13 +15,13 @@
   <div>
     <% if @post.bookmarked_by?(current_user) %>
       <p>
-        <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        <%= link_to post_bookmark_path(@post), method: :delete do %>
           ♥<%= @post.bookmarks.count %> ブックマーク
         <% end %>
       </p>
     <% else %>
       <p>
-        <%= link_to post_bookmarks_path(@post), method: :post do %>
+        <%= link_to post_bookmark_path(@post), method: :post do %>
           ♡<%= @post.bookmarks.count %> ブックマーク
         <% end %>
       </p>
@@ -29,6 +29,7 @@
   </div>
 
   <div>
+    <!-- コメント表示 -->
     <p>コメント件数：<%= @post.post_comments.count %></p>
     <% @post.post_comments.each do |post_comment| %>
       <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
