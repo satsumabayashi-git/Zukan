@@ -3,7 +3,11 @@
   <% @posts.each do |post| %>
     <li>
       <%= image_tag post.get_image(200,200) %> - <%= post.body %> 
-      <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+      <%= link_to '投稿を削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
     </li>
+    <% post.post_comments.each do |post_comment| %>
+        <%= post_comment.comment %>
+        <%= link_to 'コメントを削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% end %>
   <% end %>
 </ul>
