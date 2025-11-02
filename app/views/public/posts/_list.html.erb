@@ -2,6 +2,7 @@
   <% posts.each do |post| %>
     <div class="col-lg-3 col-sm-10 mb-3 mb-sm-0">
       <div class="card mx-auto mt-4 shadow-lg" style="height: 450px;">
+        <%= link_to "#{post.category.name}", categorized_path(post.category.id), class: "dropdown-item" %>
         <%= link_to post_path(post.id), class: "card-img-top " do %>
           <%= image_tag post.get_image(200,200), size: "250x250" %>
         <% end %>

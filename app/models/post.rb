@@ -13,6 +13,7 @@ class Post < ApplicationRecord
 
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
+  #scope :bookmark_order -> {sort_by { |post| post.bookmarks.count }.reverse!}
 
   def get_image(width, height)
     unless image.attached?

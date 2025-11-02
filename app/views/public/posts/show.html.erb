@@ -2,9 +2,7 @@
 <div class="container py-5">
 
   <div class="d-flex justify-content-end">
-    <button class="btn-outline-info">
-      <%= @post.category.name %>
-    </button>
+    <%= link_to "#{@post.category.name}", categorized_path(@post.category.id), class: "btn btn-outline-info" %>
   </div>
   <div class="d-flex justify-content-center">
     <%= image_tag @post.get_image(500,500), class: "rounded"; %>

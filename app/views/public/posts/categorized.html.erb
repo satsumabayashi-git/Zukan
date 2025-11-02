@@ -1,0 +1,11 @@
+<h1>カテゴリ検索：<%= Category.find(params[:category_id]).name %></h1>
+<div class="container py-5">
+  <div>
+    <ul class="nav justify-content-end">
+    <li class="nav-item"><%= link_to "新着順", categorized_path(latest: "true"), class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to "古い順", categorized_path(old: "true"), class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to "ブックマーク順", categorized_path(bookmark_count: "true"), class: "nav-link" %> </li>
+    </ul>
+  </div>
+  <%= render 'list', posts: @posts %>
+</div>

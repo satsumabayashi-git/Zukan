@@ -57,10 +57,23 @@ class Public::PostsController < ApplicationController
     @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
   end
 
-private
+  def categorized
+    bookmarks = current_user.bookmarks
+    categorized_posts =  Post.where(category_id: params[:category_id])
+    if params[:old]
+      my_array_object =  categorized_posts.old
+    elsif params[:bookmark_count]
+      my_array_object =  categorized_posts.sort_by { |post| post.bookmarks.count }.reverse!
+    else
+      my_array_object =  categorized_posts.latest
+    end
+    @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
+  end
 
-def post_params
-  params.require(:post).permit(:body, :image, :date, :place, :category_id)
-end
+  private
+
+  def post_params
+    params.require(:post).permit(:body, :image, :date, :place, :category_id)
+  end
 
 end
