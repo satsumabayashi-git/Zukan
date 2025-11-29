@@ -1,20 +1,24 @@
 <div class="row">
   <% posts.each do |post| %>
-    <div class="col-lg-3 col-sm-10 mb-3 mb-sm-0">
-      <div class="card mx-auto mt-4 shadow-lg" style="height: 450px;">
+    <div class="col-10 col-lg-3 mb-3">
+      <div class="card mx-auto mt-4 shadow-lg " style="height: 400px;">
         <%= link_to "#{post.category.name}", categorized_path(post.category.id), class: "dropdown-item" %>
-        <%= link_to post_path(post.id), class: "card-img-top " do %>
-          <%= image_tag post.get_image(200,200), size: "250x250" %>
+        <%= link_to post_path(post.id), class: "w-100" do %>
+          <%= image_tag post.get_image(250,250) %>
         <% end %>
         <div class="card-body">
-          <p class="card-text"><%= post.body %></p>
-          <div class="row align-items-end">
+          <div class="card-text d-block" style="height: 70px;">
+            <p class="text-truncate" style="max-width: 180px;">
+              <%= post.body %>
+            </p>
+          </div>
+          <div class="row pt-auto">
             <div class="col-3">
               <%= link_to user_path(post.user.id) do %>
                 <%= image_tag post.user.get_profile_image(40, 40), class: "translate-middle rounded-circle"; %>
               <% end %>
             </div>
-            <div class="col-9">
+            <div class="col-9 ">
               <span><i class="fas fa-user"></i> By <%= post.user.name %> </span><br>
               <span class="text-dark">
                 <%= link_to post_path(post.id) do %>
