@@ -21,7 +21,9 @@
 - 特徴が似ていて自分では区別がつかない生き物の種別を特定してもらいたいとき
 ​
 ## 設計書
-後ほど作成予定
+- ER図：https://drive.google.com/file/d/16bf4MvgjYSpM3mfgn5MDS9HV-OgtP0JP/view?usp=drive_link
+- UIFlows：https://drive.google.com/file/d/1Lf4FRIQ1mA2k2eYtW5ngxovmxTgxB8pb/view?usp=drive_link
+- アプリケーション詳細設計書：https://docs.google.com/spreadsheets/d/1-x2HTD88kHMjN3m_qiLWZNKTJvGvyXAZ1Y_fpeMa6Fw/edit?usp=drive_link
 ​
 ## 開発環境
 - OS：Windows
@@ -31,4 +33,4 @@
 - IDE：Visual Studio Code（VSCode）
 ​
 ## 使用素材
-未定
+いらすとや
