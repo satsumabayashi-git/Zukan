@@ -1,25 +1,31 @@
-<div class="row">
+<div class="row ">
   <% posts.each do |post| %>
-    <div class="col-10 col-lg-3 mb-3">
-      <div class="card mx-auto mt-4 shadow-lg " style="height: 400px;">
-        <%= link_to "#{post.category.name}", categorized_path(post.category.id), class: "dropdown-item" %>
-        <%= link_to post_path(post.id), class: "w-100" do %>
-          <%= image_tag post.get_image(250,250) %>
-        <% end %>
+    <div class="col mt-4">
+
+      <div class="card mx-auto  shadow-lg " style="width: 256px; height: 360px;">
+        <div >
+          <%= link_to "#{post.category.name}", categorized_path(post.category.id), class: "btn btn-outline-info btn-sm" %>
+        </div>
+        <div class="d-flex w-100" style="height: 200px;">
+          <%= link_to post_path(post.id), class: "mx-auto my-auto" do %>
+            <%= image_tag post.get_image(250,200), class: "img-thumbnail border rounded" %>
+          <% end %>
+        </div>
         <div class="card-body">
-          <div class="card-text d-block" style="height: 70px;">
-            <p class="text-truncate" style="max-width: 180px;">
+          <div class="card-text" style="height: 25px; ">
+            <span class="d-inline-block text-truncate" style="max-width: 215px;">
               <%= post.body %>
-            </p>
+            </span>
           </div>
+          <hr class="my-1">
           <div class="row pt-auto">
-            <div class="col-3">
-              <%= link_to user_path(post.user.id) do %>
-                <%= image_tag post.user.get_profile_image(40, 40), class: "translate-middle rounded-circle"; %>
+            <div class="col-3 d-flex">
+              <%= link_to user_path(post.user.id), class: "mx-auto my-auto" do %>
+                <%= image_tag post.user.get_profile_image(45, 45), class: "translate-middle border rounded-circle" %>
               <% end %>
             </div>
             <div class="col-9 ">
-              <span><i class="fas fa-user"></i> By <%= post.user.name %> </span><br>
+              <span class="d-inline-block text-truncate" style="max-width: 150px;"><i class="fas fa-user"></i> By <%= post.user.name %> </span><br>
               <span class="text-dark">
                 <%= link_to post_path(post.id) do %>
                   <%= post.post_comments.count %> <i class="fa-regular fa-message"></i> ｜

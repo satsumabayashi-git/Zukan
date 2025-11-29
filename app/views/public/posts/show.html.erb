@@ -9,12 +9,12 @@
   </div>
 
   <div class="row m-3">
-    <%= link_to user_path(@post.user.id), class: "col-md-4" do %>
+    <%= link_to user_path(@post.user.id), class: "col-md-4 mr-auto" do %>
       <%= image_tag @post.user.get_profile_image(100, 100), class: "rounded-circle" %>
-      <%= @post.user.name %>
+      <span class="overflow-x-visible"><%= @post.user.name %></span>
     <% end %>
     <!-- ブックマークとコメント件数 -->
-    <span class="col-md-1 offset-md-5 align-self-end">
+    <span class="col-md-1  align-self-end">
       <% if @post.bookmarked_by?(current_user) %>
         <%= link_to post_bookmark_path(@post), method: :delete do %>
           <%= @post.bookmarks.count %> <i class="fa-solid fa-star"></i>
@@ -28,11 +28,13 @@
     <span class="col-md-1 align-self-end">
       <%= @post.post_comments.count %> <i class="fa-regular fa-message"></i>
     </span>
-    <span class="col-md-1 align-self-end">
-      <% if current_user == @post.user %>
-        <%= link_to "削除", post_path(@post.id), class: "my-3 btn btn-outline-danger", method: :delete %>
-      <% end %>
-    </span>
+    <% if current_user == @post.user %>
+      <span class="col-md-2 align-self-end">
+        <div class="d-flex justify-content-center">
+          <%= link_to "削除", post_path(@post.id), class: "btn btn-outline-danger", method: :delete %>
+        </div>
+      </span>
+    <% end %>
   </div>
 
   <!-- 投稿データ -->
