@@ -33,23 +33,33 @@
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="ml-5 collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="ml-3 collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "TOP", posts_path, class: 'nav-link text-dark' %>
+                  <%= link_to(posts_path , class: 'nav-link') do %>
+                    <i class="fa-solid fa-house"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "新規投稿", new_post_path, class: 'nav-link text-dark' %>
+                  <%= link_to(new_post_path , class: 'nav-link') do %>
+                    <i class="fa-solid fa-square-plus"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %>
+                  <%= link_to(user_path(current_user.id) , class: 'nav-link') do %>
+                    <i class="fa-solid fa-user"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ブックマーク", bookmarked_path, class: 'nav-link text-dark' %>
+                  <%= link_to(bookmarked_path , class: 'nav-link') do %>
+                    <i class="fa-solid fa-bookmark"></i>
+                  <% end %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+                  <%= link_to(destroy_user_session_path,  method: :delete, class: 'nav-link') do %>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  <% end %>
                 </li>
               <% else %>
                 <li class="nav-item">
@@ -71,5 +81,14 @@
       <div class="flash-message <%= message_type %>"><%= message %></div>
     <% end %>
     <%= yield %>
+    <footer class="bg-dark text-white pt-4 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col text-center">
+             <%= link_to "このサイトについて", about_path, class: "text-white-50" %>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

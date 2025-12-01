@@ -1,5 +1,24 @@
-<h1>カテゴリ検索：<%= Category.find(params[:category_id]).name %></h1>
-<div class="container py-5">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">カテゴリ検索：<%= Category.find(params[:category_id]).name %></li>
+  </ol>
+</nav>
+
+<div class="container-xxl py-2 mb-5">
+<!-- カテゴリ検索ボタン -->
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+      カテゴリ検索
+    </button>
+    <ul class="dropdown-menu">
+      <% Category.all.each do |category| %>
+        <li>
+          <%= link_to "#{category.name}", categorized_path(category.id), class: "dropdown-item" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
   <div>
     <ul class="nav justify-content-end">
     <li class="nav-item"><%= link_to "新着順", categorized_path(latest: "true"), class: "nav-link" %></li>

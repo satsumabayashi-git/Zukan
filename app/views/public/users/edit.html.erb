@@ -1,4 +1,10 @@
-<h2>プロフィール編集</h2>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
+    <li class="breadcrumb-item"><%= link_to "プロフィール", user_path(@user.id) %></li>
+    <li class="breadcrumb-item active" aria-current="page">プロフィール編集</li>
+  </ol>
+</nav>
 
 <% if @user.errors.any? %>
   <%= @user.errors.count %>件のエラーが発生しました

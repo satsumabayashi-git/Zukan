@@ -1,9 +1,15 @@
-<h2>検索結果</h2>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">検索</li>
+  </ol>
+</nav>
+
 <div class="container py-5">
   <% if @range == "User" %>
     <div class="row">
       <% @users.each do |user| %>
-        <div class="card" style="width: 18rem;">
+        <div class="card mr-1" style="width: 18rem;">
           <div class="card-header">
             <%= user.name %>
           </div>
@@ -23,7 +29,7 @@
   <% else %>
     <div class="row">
       <% @posts.each do |post| %>
-        <div class="card" style="width: 15rem;">
+        <div class="card card mr-1" style="width: 15rem;">
           <%= link_to post_path(post.id), class:"mx-auto" do %>
             <%= image_tag post.get_image(200, 200), class:"card-img-top rounded" %>
           <% end %> 
