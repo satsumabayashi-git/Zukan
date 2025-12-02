@@ -28,12 +28,12 @@
         <% end %>
       <% else %>
         <%= link_to post_bookmark_path(@post), method: :post do %>
-          <%= @post.bookmarks.count %> <i class="fa-regular fa-star"></i>
+          <%= @post.bookmarks.count %> <i class="fa-regular fa-bookmark"></i>
         <% end %>
       <% end %>
     </span>
     <span class="col-md-1 align-self-end">
-      <%= @post.post_comments.count %> <i class="fa-regular fa-bookmark"></i>
+      <%= @post.post_comments.count %> <i class="fa-regular fa-message"></i>
     </span>
     <% if current_user == @post.user %>
       <span class="col-md-2 align-self-end">
