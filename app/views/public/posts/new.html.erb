@@ -22,7 +22,7 @@
         <% end %>
         <%= form_with model: @post do |f| %>
           <h5>画像</h5>
-          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <%= f.file_field :image, accept: "image/jpeg", class: "w-100" %>
           <h5>カテゴリー</h5>
           <% @categorys.each do |category| %>
             <%= f.radio_button :category_id, :"#{category.id}" %>
