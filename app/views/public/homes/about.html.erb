@@ -1,5 +1,8 @@
 <div class="container-xxl my-3">
   <h2 class="text-center">”なんでもソーシャル生き物図鑑”にようこそ！</h2>
   <p class="text-center">ここは生き物の写真を投稿して、生き物に関する知識を広めていくコミュニティサイトです。<br>
-    日常で気になる生き物に出会ったら、写真を撮って投稿してみましょう！</p>
+    日常で気になる生き物に出会ったら、写真を撮って投稿してみましょう</p>
 </div>
+
+<%= pie_chart Vote.group(:opinion).count %>
+
