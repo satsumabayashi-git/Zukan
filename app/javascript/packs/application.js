@@ -13,9 +13,8 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
 
-// import "chartkick/chart.js"
-require("chartkick")
-require("chart.js")
+import "chartkick"
+import "Chart.bundle"
 
 Rails.start()
 Turbolinks.start()

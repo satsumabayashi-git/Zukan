@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.1.2'  
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
+gem 'rails', '~> 7.0.10'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
@@ -68,3 +68,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem "importmap-rails", "~> 2.2"
+gem 'bootstrap', '~> 4.5.0'
