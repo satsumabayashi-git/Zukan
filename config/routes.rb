@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     devise_for :users
     root to: 'homes#top'
     get 'home/about' => 'homes#about', as: 'about'
+    get 'home/test' => 'homes#test'
     get 'search' => 'searches#search', as: 'search'
     get 'post/bookmarked_index' => 'posts#bookmarked_index', as: 'bookmarked'
     get 'post/categorized/:category_id' => 'posts#categorized', as: 'categorized'
@@ -34,6 +35,8 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       resource :bookmark, only: [:create, :destroy]
     end
+
     resources :users, only: [:index, :show, :edit, :update, :destroy]
   end
+
 end

@@ -3,6 +3,10 @@ class Public::HomesController < ApplicationController
   end
 
   def about
+    @post = Post.find(1)
+  end
+
+  def test
   end
   
 end

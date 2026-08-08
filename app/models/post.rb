@@ -9,7 +9,7 @@ class Post < ApplicationRecord
 
   validates :image, presence: true
   validates :body, presence: true
-  validates :category_id, presence: true
+  # validates :category_id, presence: true
 
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
@@ -23,10 +23,12 @@ class Post < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def image_url
+    Rails.application.routes.url_helpers.rails_blob_url(image, only_path: true)
+  end
+
   def bookmarked_by?(user)
-    if user.present?
-      bookmarks.exists?(user_id: user.id)
-    end
+    bookmarks.exists?(user_id: user.id) if user.present?
   end
 
 end
