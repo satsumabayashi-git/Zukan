@@ -1,0 +1,87 @@
+/* ロゴ */
+
+/* オートレイアウト */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 117px;
+gap: 10px;
+
+position: absolute;
+width: 834px;
+height: 89px;
+left: 0px;
+top: 0px;
+
+background: #FFB2B3;
+
+
+/* ヘッダー */
+
+position: absolute;
+width: 834px;
+height: 46px;
+left: 0px;
+top: 89px;
+
+background: #F3E2BE;
+
+
+/* ナビゲーション */
+
+/* オートレイアウト */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-end;
+padding: 0px 12px;
+gap: 1px;
+
+position: absolute;
+width: 834px;
+height: 54px;
+left: calc(50% - 834px/2);
+top: 135px;
+
+background: #FFFFFF;
+
+
+/* ヘッダー */
+
+position: absolute;
+width: 834px;
+height: 46px;
+left: 0px;
+top: 89px;
+
+background: #F3E2BE;
+
+/* 検索 */
+
+/* オートレイアウト */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 12px;
+gap: 5px;
+
+position: absolute;
+width: 284px;
+height: 33px;
+left: calc(50% - 284px/2);
+top: calc(50% - 33px/2 + 0.5px);
+
+/* Frame 3 */
+
+width: 65px;
+height: 18px;
+
+background: #0088FF;
+border-radius: 5px;
+
+/* オートレイアウト内部 */
+flex: none;
+order: 0;
+flex-grow: 0;
