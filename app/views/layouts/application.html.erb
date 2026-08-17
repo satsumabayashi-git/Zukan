@@ -8,6 +8,10 @@
     <%= csp_meta_tag %> 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://kit.fontawesome.com/3006deca4b.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -15,12 +19,6 @@
 
     <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
     <!-- stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
-
   </head>
   <body>
     <header>
@@ -61,7 +59,7 @@
                 <% end %>
               </li>
               <li class="nav-item" style="width: 112px">
-                <%= link_to(destroy_user_session_path,  method: :delete, class: 'nav-link', style: 'color: #494C4D') do %>
+                <%= button_to(destroy_user_session_path,  method: :delete, data: { turbo_method: :delete }, class: 'nav-link', style: 'color: #494C4D; border: none; background-color: #F8F9FA') do %>
                   <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></div>
                   <h6 class="text-center">ログアウト</h6>
                 <% end %>
@@ -81,6 +79,9 @@
         </div>
       </nav>
     </div>
+    <% flash.each do |message_type, message| %>
+      <div class="flash-message <%= message_type %>"><%= message %></div>
+    <% end %>
     </header>
   </body>
 
