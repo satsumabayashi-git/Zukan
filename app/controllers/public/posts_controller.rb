@@ -5,14 +5,23 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    if  params[:old]
+    case params[:order]
+    when "old" then
       @posts = Post.old.page(params[:page])
-    elsif params[:bookmark_count]
+    when "bookmark" then
       my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
       @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
     else
       @posts = Post.latest.page(params[:page])
     end
+    # if  params[:old]
+    #   @posts = Post.old.page(params[:page])
+    # elsif params[:bookmark_count]
+    #   my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
+    #   @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
+    # else
+    #   @posts = Post.latest.page(params[:page])
+    # end
   end
 
   def show
