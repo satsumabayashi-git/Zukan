@@ -15,22 +15,28 @@
   </div>
 <% end %>
 
-<div class="card rounded container-lg my-5" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+<div class="card rounded container-lg my-4" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
   <%= form_with model: @post do |f| %>
-    <div class="row mt-3">
+    <div class="row mt-5">
       <div class="col-md-2 py-2 pl-4"><h6>タイトル</h6></div>
       <div class="col-md-8"><%= f.text_area :body, class: "form-control" %></div>
     </div>
     <div class="row mt-3">
       <div class="col-md-2 py-2 pl-4"><h6>画像</h6></div>
-      <div class="col-md-8"><%= f.file_field :image, accept: "image/jpeg", class: "w-100" %></div>
+      <div class="col-md-8">
+        <%= f.label :image , "画像をアップロード", class: "btn btn-primary" %>
+        <%= f.file_field :image, accept: "image/jpeg", class: "", style: "display: none;" %>
+      </div>
     </div>
+    <div class="p-3 mx-auto" style="width: 0px; height: 0px; background-size: contain; background-repeat: no-repeat; background-position: center;" id="preview"></div>
     <div class="row mt-3">
       <div class="col-md-2 py-2 pl-4"><h6>カテゴリー</h6></div>
       <div class="col-md-8">
         <% @categorys.each do |category| %>
-          <%= f.radio_button :category_id, :"#{category.id}" %>
-          <%= f.label :category_id, "#{category.name}", value: :"#{category.id}" %>
+          <div class="" style="width: 128">
+            <%= f.radio_button :category_id, :"#{category.id}" %>
+            <%= f.label :category_id, "#{category.name}", value: :"#{category.id}" %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -47,12 +53,35 @@
       <!-- <%= f.text_field :place, class: "form-control" %> -->
     </div>
     <div class="row justify-content-center mx-auto mt-3 mb-5">
-      <div class="col-md-8">
-        <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info" %>
-        <!-- <%= f.submit :button, class: "btn btn-lg btn-block btn-info" do %> -->
-        <!-- <i class="fa-regular fa-paper-plane"></i> -->
-        <!-- <% end %> -->
+      <div class="col-md-5">
+        <%= button_tag type: 'submit', class: "btn btn-lg btn-block btn-info" do %>
+          <i class="fa-regular fa-paper-plane"></i> <span>投稿</span>
+        <!-- <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info", style: "display: none;"%> -->
+        <% end %>
       </div>
     </div>
   <% end %>
 </div>
+
+<script>
+  const preview = document.getElementById("preview");
+  const fileInput = document.getElementById("post_image");
+  
+  fileInput.addEventListener("change", previewFile);
+  
+  function previewFile() {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+  
+    reader.addEventListener("load", () => {
+      // 画像ファイルを base64 文字列に変換
+      preview.style.backgroundImage = `url(${reader.result})`;
+      preview.style.width = "200px";
+      preview.style.height = "200px";
+    });
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
