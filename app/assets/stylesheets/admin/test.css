@@ -31,3 +31,23 @@ text-align: center;
 
 color: #494C4D;
 
+/* Frame 13 */
+
+/* オートレイアウト */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 3px 5px;
+gap: 5px;
+
+width: 45px;
+height: 20px;
+
+background: #CB30E0;
+border-radius: 5px;
+
+/* オートレイアウト内部 */
+flex: none;
+order: 1;
+flex-grow: 0;

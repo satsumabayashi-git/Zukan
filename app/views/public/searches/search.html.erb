@@ -1,9 +1,6 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">検索</li>
-  </ol>
-</nav>
+<h4 class="m-4">
+  <strong>検索結果</strong>
+</h4>
 
 <div class="container py-5">
   <% if @range == "User" %>
@@ -27,23 +24,6 @@
     </div>
     <%= paginate @users %>
   <% else %>
-    <div class="row">
-      <% @posts.each do |post| %>
-        <div class="card card mr-1" style="width: 15rem;">
-          <%= link_to post_path(post.id), class:"mx-auto" do %>
-            <%= image_tag post.get_image(200, 200), class:"card-img-top rounded" %>
-          <% end %> 
-          <div class="card-body">
-            <p class="card-text"><%= post.body %></p>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><%= post.category.name %></li>
-              <li class="list-group-item"><%= post.date %></li>
-              <li class="list-group-item"><%= post.place %></li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%= paginate @posts %>
+    <%= render 'list', posts: @posts %>
   <% end %>
 </div>

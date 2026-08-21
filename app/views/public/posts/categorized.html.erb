@@ -1,30 +1,47 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">カテゴリ検索：<%= Category.find(params[:category_id]).name %></li>
-  </ol>
-</nav>
+<h4 class="m-4">
+  <strong>
+    <%= link_to posts_path, class: "headline", style: "color: #494C4D;" do %>
+    カテゴリ検索：<%= Category.find(params[:category_id]).name %>
+    <% end %>
+  </strong>
+</h4>
 
-<div class="container-xxl py-2 mb-5">
-<!-- カテゴリ検索ボタン -->
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-      カテゴリ検索
-    </button>
-    <ul class="dropdown-menu">
-      <% Category.all.each do |category| %>
-        <li>
-          <%= link_to "#{category.name}", categorized_path(category.id), class: "dropdown-item" %>
-        </li>
-      <% end %>
-    </ul>
+<div class="container-lg">
+  <div class="d-flex m-4">
+    <!-- カテゴリ検索ボタン -->
+    <div class="dropdown mr-auto">
+      <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+        カテゴリ検索
+      </button>
+      <ul class="dropdown-menu">
+        <% Category.all.each do |category| %>
+          <li>
+            <%= link_to "#{category.name}", categorized_path(category.id), class: "dropdown-item" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- ソートボタン -->
+    <div class="ml-auto">
+      <ul class="nav nav-pills">
+        <% case params[:order] %>
+        <% when "old" then %>
+          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link active" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link" %> </li>
+        <% when "bookmark" then %>
+          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link active" %> </li>
+        <% else %>
+          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link active" %></li>
+          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link" %> </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <div>
-    <ul class="nav justify-content-end">
-    <li class="nav-item"><%= link_to "新着順", categorized_path(latest: "true"), class: "nav-link" %></li>
-    <li class="nav-item"><%= link_to "古い順", categorized_path(old: "true"), class: "nav-link" %></li>
-    <li class="nav-item"><%= link_to "ブックマーク順", categorized_path(bookmark_count: "true"), class: "nav-link" %> </li>
-    </ul>
-  </div>
+
   <%= render 'list', posts: @posts %>
 </div>

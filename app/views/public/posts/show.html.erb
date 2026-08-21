@@ -1,86 +1,97 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">投稿詳細</li>
-  </ol>
-</nav>
+<h4 class="m-4">
+  <strong><%= link_to "投稿詳細", post_path(@post.id), class: "headline", style: "color: #494C4D;" %></strong>
+</h4>
 
 
-<div class="container py-5">
-
-  <div class="d-flex justify-content-end">
-    <%= link_to "#{@post.category.name}", categorized_path(@post.category.id), class: "btn btn-outline-info" %>
-  </div>
-  <div class="d-flex justify-content-center">
-    <%= image_tag @post.get_image(1000,1000), class: "img-fluid rounded"; %>
-  </div>
-
-  <div class="row m-3">
-    <%= link_to user_path(@post.user.id), class: "col-md-4 mr-auto" do %>
-      <%= image_tag @post.user.get_profile_image(100, 100), class: "rounded-circle" %>
-      <span class="overflow-x-visible"><%= @post.user.name %></span>
-    <% end %>
-    <!-- ブックマークとコメント件数 -->
-    <span class="col-md-1  align-self-end">
-      <% if @post.bookmarked_by?(current_user) %>
-        <%= link_to post_bookmark_path(@post), method: :delete do %>
-          <%= @post.bookmarks.count %> <i class="fa-solid fa-bookmark"></i>
+<div class="container-lg">
+  <div class="mt-4 mx-2" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+    <div class="d-flex">
+      <div class="">
+        <%= link_to categorized_path(@post.category.id) do %>
+          <button class="btn btn-info btn-lg" style="width: 300px;"><%= @post.category.name %></button>
         <% end %>
-      <% else %>
-        <%= link_to post_bookmark_path(@post), method: :post do %>
-          <%= @post.bookmarks.count %> <i class="fa-regular fa-bookmark"></i>
-        <% end %>
-      <% end %>
-    </span>
-    <span class="col-md-1 align-self-end">
-      <%= @post.post_comments.count %> <i class="fa-regular fa-message"></i>
-    </span>
-    <% if current_user == @post.user %>
-      <span class="col-md-2 align-self-end">
-        <div class="d-flex justify-content-center">
-          <%= link_to "削除", post_path(@post.id), class: "btn btn-outline-danger", method: :delete %>
-        </div>
-      </span>
-    <% end %>
-  </div>
+      </div>
+      <div class="ml-auto">
+        <h5 class="my-2"><%= @post.created_at.strftime('%Y/%m/%d') %></h5>
+      </div>
+    </div>
 
-  <!-- 投稿データ -->
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>
-          本文
-        </th>
-        <th>
+    <div class="mx-auto card rounded" style="">
+      <div class="card-body p-2">
+        <h3 class="mx-auto mt-2 card-title text-center text-dark">
           <%= @post.body %>
-        </th>
-      </tr>
-      <tr>
-        <th>
-          日時
-        </th>
-        <th>
-          <%= @post.date %>
-        </th>
-      </tr>
-      <tr>
-        <th>
-          場所
-        </th>
-        <th>
-          <%= @post.place %>
-        </th>
-      </tr>
-      <tr>
-        <th>
-          投稿日
-        </th>
-        <th>
-          <%= @post.created_at.strftime('%Y/%m/%d') %>
-        </th>
-      </tr>
-    </tbody>
-  </table>
+        </h3>
+        <div class="d-flex w-100 my-3">
+          <%= link_to post_path(@post.id), class: "mx-auto my-auto" do %>
+            <%= image_tag @post.get_image(600,600), class: "img-thumbnail border rounded" %>
+          <% end %>
+        </div>
+
+        <div class="mt-1 mb-1 mx-auto d-flex flex-row" style="width: 600px;">
+          <div class="mr-2">
+            <%= link_to user_path(@post.user.id), class: "" do %>
+              <%= image_tag @post.user.get_profile_image(50, 50), class: "translate-middle border rounded-circle" %>
+            <% end %>
+          </div>
+          <h6 class="mb-0 pt-2 text-justify text-truncate" style="max-width: 300px;">
+            <%= @post.user.name %>
+          </h6>
+          <div class="d-flex flex-row ml-auto pl-3">
+            <div class="">
+              <%= button_to(post_path(@post.id), method: :get, data: { turbo_method: :get }, class: "d-flex flex-row mr-3 my-2", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+                <i class="fa-regular fa-message fa-xl my-auto"></i>
+                <h5 class="text-dark my-0 ml-2"><%= @post.post_comments.count %></h5>
+              <% end %>
+            </div>
+            <div class="d-flex flex-row">
+              <% if @post.bookmarked_by?(current_user) %>
+                <%= button_to(post_bookmark_path(@post), method: :delete, data: { turbo_method: :delete }, class: "d-flex flex-row mr-3 my-2", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+                  <i class="fa-solid fa-bookmark fa-xl my-auto"></i>
+                  <h5 class="text-dark my-0 ml-2"><%= @post.bookmarks.count %></h5>
+                <% end %>
+              <% else %>
+                <%= button_to(post_bookmark_path(@post), method: :post, data: { turbo_method: :post }, class: "d-flex flex-row my-2", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+                  <i class="fa-regular fa-bookmark fa-xl my-auto"></i>
+                  <h5 class="text-dark my-0 ml-2"><%= @post.bookmarks.count %></h5>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+          
+        <hr class="mt-2 mb-4" style="border-color: #494C4D;">
+
+        <div class="row mt-2">
+          <div class="col-md-2 py-2 pl-5"><h5>日時：</h5></div>
+          <div class="col-md-8"><h5 class="py-2 "><%= @post.date %></h5></div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-2 py-2 pl-5"><h5>場所：</h6></div>
+          <div class="col-md-8"><h5 class="py-2 "><%= @post.place %></h5></div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-2 py-2 pl-5"><h5>メモ：</h6></div>
+          <div class="col-md-8"><h5 class="py-2 ">ここにメモを表示</h5></div>
+        </div>
+        <% if current_user == @post.user %>
+          <div class="d-flex justify-content-end">
+            <div class="mr-2">
+              <%= button_to(post_path(@post.id), method: :get, data: { turbo_method: :get }, class: "btn btn-danger", style: "background-color: #CB30E0;") do %>
+              <i class="fa-regular fa-pen-to-square"></i>
+              <span>編集</span>
+              <% end %>
+            </div>
+            <div class="mr-3">
+              <%= button_to(post_path(@post.id), method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger") do %>
+              <i class="fa-regular fa-trash-can"></i>
+              <span>削除</span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <!-- 返信一覧 -->
   <div class="mt-5">
