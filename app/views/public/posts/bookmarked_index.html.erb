@@ -1,18 +1,7 @@
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to "投稿一覧", posts_path %></li>
-    <li class="breadcrumb-item active" aria-current="page">ブックマーク</li>
-  </ol>
-</nav>
+<h4 class="m-4">
+  <strong><%= link_to "ブックマーク一覧", bookmarked_path, class: "headline", style: "color: #494C4D;" %></strong>
+</h4>
 
-<div class="container py-5">
-    <!-- ソートボタン -->
-    <ul class="nav justify-content-end">
-      <li class="nav-item"><%= link_to "追加日新しい順", bookmarked_path, class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "追加日古い順", bookmarked_path(bookmarked_old: "true"), class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "投稿日新着順", bookmarked_path(latest: "true"), class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "投稿日古い順", bookmarked_path(old: "true"), class: "nav-link" %> </li>
-    </ul>
-
+<div class="container xl">
   <%= render 'list', posts: @posts %>
 </div>
