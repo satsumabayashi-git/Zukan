@@ -2,9 +2,8 @@
   <strong><%= link_to "投稿一覧", posts_path, class: "headline", style: "color: #494C4D;" %></strong>
 </h4>
 
-<div class="container-lg">
-  <div class="d-flex m-4">
-    <!-- カテゴリ検索ボタン -->
+<div class="container-xl">
+  <div class="d-flex align-content-start flex-wrap m-4">
     <div class="dropdown mr-auto">
       <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
         カテゴリ検索
@@ -18,7 +17,6 @@
       </ul>
     </div>
 
-    <!-- ソートボタン -->
     <div class="ml-auto">
       <ul class="nav nav-pills">
         <% case params[:order] %>

@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap justify-content-center">
   <% posts.each do |post| %>
   <div class="mt-4 mx-2" style="width: 223px; height: 300px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
     <div>
@@ -7,7 +7,7 @@
       <% end %>
     </div>
 
-    <div class="mx-auto card rounded" style="width: 223px; height: 260px;">
+    <div class="mx-auto card rounded" style="width: 223px; height: 260px; background-color: #F8F9FA;">
       <div class="card-body p-2">
         <h6 class="mx-auto card-title text-center text-truncate text-dark" style="max-width: 215px;">
           <%= post.body %>
