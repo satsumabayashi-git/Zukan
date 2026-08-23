@@ -30,7 +30,7 @@
         <div class="mt-1 mb-1 mx-auto d-flex flex-wrap" style="max-width: 600px;">
           <div class="mr-2">
             <%= link_to user_path(@post.user.id), class: "" do %>
-              <%= image_tag @post.user.get_profile_image(50, 50), class: "translate-middle border rounded-circle" %>
+              <%= image_tag @post.user.get_profile_image(50, 50), size: "50x50", class: "translate-middle border rounded-circle" %>
             <% end %>
           </div>
           <h6 class="mb-0 pt-2 text-justify text-truncate" style="max-width: 300px;">
