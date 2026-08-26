@@ -7,13 +7,24 @@ class Public::PostsController < ApplicationController
   def index
     case params[:order]
     when "old" then
-      @posts = Post.old.page(params[:page])
+      ordered_object = Post.old
     when "bookmark" then
-      my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
-      @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
+      ordered_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
     else
-      @posts = Post.latest.page(params[:page])
+      ordered_object = Post.latest
     end
+    @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
+
+    # case params[:order]
+    # when "old" then
+    #   @posts = Post.old.page(params[:page])
+    # when "bookmark" then
+    #   my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
+    #   @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
+    # else
+    #   @posts = Post.latest.page(params[:page])
+    # end
+    
     # if  params[:old]
     #   @posts = Post.old.page(params[:page])
     # elsif params[:bookmark_count]
@@ -71,14 +82,24 @@ class Public::PostsController < ApplicationController
   def categorized
     bookmarks = current_user.bookmarks
     categorized_posts =  Post.where(category_id: params[:category_id])
-    if params[:old]
-      my_array_object =  categorized_posts.old
-    elsif params[:bookmark_count]
-      my_array_object =  categorized_posts.sort_by { |post| post.bookmarks.count }.reverse!
+    case params[:order]
+    when "old" then
+      ordered_object = categorized_posts.old
+    when "bookmark" then
+      ordered_object = categorized_posts.all.sort_by { |post| post.bookmarks.count }.reverse!
     else
-      my_array_object =  categorized_posts.latest
+      ordered_object = categorized_posts.latest
     end
-    @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
+    @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
+
+    # if params[:old]
+    #   my_array_object =  categorized_posts.old
+    # elsif params[:bookmark_count]
+    #   my_array_object =  categorized_posts.sort_by { |post| post.bookmarks.count }.reverse!
+    # else
+    #   my_array_object =  categorized_posts.latest
+    # end
+    # @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
   end
 
   private
@@ -86,5 +107,9 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, :image, :date, :place, :category_id)
   end
+
+  # def order_params
+  #   params.require(:order).permit()
+  # end
 
 end

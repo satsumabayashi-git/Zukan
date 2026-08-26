@@ -1,7 +1,7 @@
 <h4 class="m-4">
-  <strong><%= link_to "ブックマーク一覧", bookmarked_path, class: "headline", style: "color: #494C4D;" %></strong>
+  <strong><%= link_to "ブックマーク一覧", bookmarked_path, class: "headline text-decoration-none", style: "color: #494C4D;" %></strong>
 </h4>
 
-<div class="container xl">
+<div class="container-xl">
   <%= render 'list', posts: @posts %>
 </div>

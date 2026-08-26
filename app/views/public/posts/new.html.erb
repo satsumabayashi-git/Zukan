@@ -1,5 +1,5 @@
 <h4 class="m-4">
-  <strong><%= link_to "新規作成", new_post_path, class: "headline", style: "color: #494C4D;" %></strong>
+  <strong><%= link_to "新規作成", new_post_path, class: "headline text-decoration-none", style: "color: #494C4D;" %></strong>
 </h4>
 
 <% if @post.errors.any? %>
@@ -18,11 +18,11 @@
 <div class="card rounded container-lg my-4" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
   <%= form_with model: @post do |f| %>
     <div class="row mt-5">
-      <div class="col-md-2 py-2 pl-4"><h6>タイトル</h6></div>
+      <div class="col-md-2 py-2 ps-4"><h6>タイトル</h6></div>
       <div class="col-md-8"><%= f.text_area :body, class: "form-control" %></div>
     </div>
     <div class="row mt-3">
-      <div class="col-md-2 py-2 pl-4"><h6>画像</h6></div>
+      <div class="col-md-2 py-2 ps-4"><h6>画像</h6></div>
       <div class="col-md-8">
         <%= f.label :image , "画像をアップロード", class: "btn btn-primary" %>
         <%= f.file_field :image, accept: "image/jpeg", class: "", style: "display: none;" %>
@@ -30,7 +30,7 @@
     </div>
     <div class="p-3 mx-auto" style="width: 0px; height: 0px; background-size: contain; background-repeat: no-repeat; background-position: center;" id="preview"></div>
     <div class="row mt-3">
-      <div class="col-md-2 py-2 pl-4"><h6>カテゴリー</h6></div>
+      <div class="col-md-2 py-2 ps-4"><h6>カテゴリー</h6></div>
       <div class="col-md-8">
         <% @categorys.each do |category| %>
           <div class="" style="width: 128">
@@ -41,22 +41,22 @@
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-md-2 py-2 pl-4"><h6>日時</h6></div>
+      <div class="col-md-2 py-2 ps-4"><h6>日時</h6></div>
       <div class="col-md-8"><%= f.text_field :date, class: "form-control" %></div>
     </div>
     <div class="row mt-3">
-      <div class="col-md-2 py-2 pl-4"><h6>場所</h6></div>
+      <div class="col-md-2 py-2 ps-4"><h6>場所</h6></div>
       <div class="col-md-8"><%= f.text_field :place, class: "form-control" %></div>
     </div>
     <div class="row mt-3">
-      <h6 class="col-md-2 py-2 pl-4">メモ</h6>
+      <h6 class="col-md-2 py-2 ps-4">メモ</h6>
       <!-- <%= f.text_field :place, class: "form-control" %> -->
     </div>
     <div class="row justify-content-center mx-auto mt-3 mb-5">
-      <div class="col-md-5">
-        <%= button_tag type: 'submit', class: "btn btn-lg btn-block btn-info" do %>
+      <div class="col-md-5 d-grid">
+        <%= button_tag type: 'submit', class: "btn btn-lg btn-block btn-info text-light" do %>
           <i class="fa-regular fa-paper-plane"></i> <span>投稿</span>
-        <!-- <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info", style: "display: none;"%> -->
+          <!-- <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info", style: "display: none;"%> -->
         <% end %>
       </div>
     </div>

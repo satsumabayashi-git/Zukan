@@ -5,12 +5,14 @@ ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7.0.10'
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+# gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -70,10 +72,15 @@ group :production do
   gem 'mysql2'
 end
 
-
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
 gem "importmap-rails", "~> 2.2"
-gem 'bootstrap', '~> 4.5.0'
+gem 'turbo-rails'
+gem "stimulus-rails"
+
+gem 'bootstrap', '~> 5.0.0'
+gem 'sassc-rails'
 gem 'jquery-rails'
+gem 'popper_js', '~> 2.11.8'
+gem 'autoprefixer-rails'

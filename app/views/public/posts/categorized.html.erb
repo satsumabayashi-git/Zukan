@@ -1,6 +1,6 @@
 <h4 class="m-4">
   <strong>
-    <%= link_to posts_path, class: "headline", style: "color: #494C4D;" do %>
+    <%= link_to posts_path, class: "headline text-decoration-none", style: "color: #494C4D;" do %>
     カテゴリ検索：<%= Category.find(params[:category_id]).name %>
     <% end %>
   </strong>
@@ -9,8 +9,8 @@
 <div class="container-lg">
   <div class="d-flex m-4">
     <!-- カテゴリ検索ボタン -->
-    <div class="dropdown mr-auto">
-      <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown me-auto">
+      <button class="btn btn-info text-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         カテゴリ検索
       </button>
       <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
     </div>
 
     <!-- ソートボタン -->
-    <div class="ml-auto">
+    <div class="ms-auto">
       <ul class="nav nav-pills">
         <% case params[:order] %>
         <% when "old" then %>

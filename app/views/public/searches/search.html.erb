@@ -1,23 +1,30 @@
-<h4 class="m-4">
-  <strong>検索結果</strong>
+<h4 class="m-4 headline" style="color: #494C4D;">
+  <strong>検索結果：<%= @word %></strong>
 </h4>
 
 <div class="container py-5">
   <% if @range == "User" %>
-    <div class="row">
+    <div class="d-flex flex-wrap justify-content-center">
       <% @users.each do |user| %>
-        <div class="card mr-1" style="width: 18rem;">
-          <div class="card-header">
-            <%= user.name %>
-          </div>
-          <%= link_to user_path(user.id), class:"mx-auto" do %>
-            <%= image_tag user.get_profile_image(100, 100), class:"rounded circle" %>
-          <% end %> 
+        <div class="card rounded container-md my-5" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 223px; height: 260px; background-color: #F8F9FA;">
           <div class="card-body">
-            <p class="card-text"><%= user.introduction %></p>
-          </div>
-          <div class="card-body">
-            <p class="card-text">好きな動物：<br><%= user.favorite_animal %></p>
+            <div class="mx-auto">
+              <div class="d-flex justify-content-center">
+                <%= link_to user_path(user.id), class: "" do %>
+                  <%= image_tag user.get_profile_image(100, 100), class: " border rounded-circle" %>
+                <% end %>
+              </div>
+              <div class="text-dark text-center">
+                <h5 class="my-1 text-truncate"><%= user.name %></h5>
+              </div>
+
+              <hr class="mt-2">
+
+              <div class="">
+                <div class="col-sm " style="max-width: 150px"><h6>好きな動物：</h6></div>
+                <div class="col-sm  ps-0"><h6 class="text-truncate"><%= user.favorite_animal %></h6></div>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>

@@ -3,7 +3,7 @@
   <div class="mt-4 mx-2" style="width: 223px; height: 300px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
     <div>
       <%= link_to categorized_path(post.category.id) do %>
-        <button class="btn btn-info btn-sm" style="width: 120px; font-size: 12px;"><%= post.category.name %></button>
+        <button class="btn btn-info btn-sm text-light" style="width: 120px; font-size: 12px;"><%= post.category.name %></button>
       <% end %>
     </div>
 
@@ -18,11 +18,10 @@
           <% end %>
         </div>
 
-
         <div class="mt-1 mb-1 d-flex flex-row">
-          <div class="mr-2">
+          <div class="me-2">
             <%= link_to user_path(post.user.id), class: "" do %>
-              <%= image_tag post.user.get_profile_image(25, 25), class: "translate-middle border rounded-circle" %>
+              <%= image_tag post.user.get_profile_image(25, 25), class: "border rounded-circle" %>
             <% end %>
           </div>
           <h6 class="mb-0 pt-2 text-justify text-truncate" style="font-size: 12px; max-width: 150px;">
@@ -32,23 +31,23 @@
           
         <hr class="my-1" style="border-color: #494C4D;">
 
-        <div class="d-flex flex-row pl-3">
+        <div class="d-flex ps-3">
           <div class="">
-            <%= link_to post_path(post.id), class: "d-flex flex-row mr-3", style: 'color: #494C4D' do %>
+            <%= link_to post_path(post.id), class: "d-flex flex-row me-3 text-decoration-none", style: 'color: #494C4D' do %>
               <i class="fa-regular fa-message my-auto"></i>
-              <p class="text-dark my-0 ml-2"><%= post.post_comments.count %></p>
+              <p class="text-dark my-0 ms-2"><%= post.post_comments.count %></p>
             <% end %>
           </div>
-          <div class="d-flex flex-row">
+          <div class="d-flex">
             <% if post.bookmarked_by?(current_user) %>
-              <%= button_to(post_bookmark_path(post), method: :delete, data: { turbo_method: :delete }, class: "d-flex flex-row mr-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+              <%= button_to(post_bookmark_path(post), method: :delete, data: { turbo_method: :delete }, class: "d-flex flex-row me-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
                 <i class="fa-solid fa-bookmark my-auto"></i>
-                <p class="my-0 ml-2"><%= post.bookmarks.count %></p>
+                <p class="my-0 ms-2"><%= post.bookmarks.count %></p>
               <% end %>
             <% else %>
-              <%= button_to(post_bookmark_path(post), method: :post, data: { turbo_method: :post }, class: "d-flex flex-row mr-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+              <%= button_to(post_bookmark_path(post), method: :post, data: { turbo_method: :post }, class: "d-flex flex-row me-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
                 <i class="fa-regular fa-bookmark my-auto"></i>
-                <p class="my-0 ml-2"><%= post.bookmarks.count %></p>
+                <p class="my-0 ms-2"><%= post.bookmarks.count %></p>
               <% end %>
             <% end %>
           </div>

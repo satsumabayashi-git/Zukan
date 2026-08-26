@@ -13,12 +13,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <meta name="turbo-cache-control" content="no-cache">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <!-- <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> -->
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-
+    <!-- <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> -->
     <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
     <!-- stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
   </head>
@@ -26,26 +26,26 @@
     <header>
     <div class="header-logo w-100 py-4 text-white" style="background-color: #FFB2B3;" >
       <h1 class="yusei-magic-regular text-center">
-        <%= link_to "みんなのソーシャル動物図鑑", posts_path, class: 'yusei-magic-regular text-center text-white' %>
+        <%= link_to "みんなのソーシャル動物図鑑", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
       </h1>
     </div>
     <div class="w-100" style="background-color: #F3E2BE;">
       <%= form_with url: search_path, local: true, method: :get, class: "form-inline py-1 mx-auto d-flex justify-content-center" do |f| %>
         <div class="px-1 rounded"><%= f.select :range, options_for_select([["投稿", 'Post'], ["ユーザー", 'User']]) %></div>
         <div class="px-1"><%= f.text_field :word , class: "form-control form-control-sm" %></div>
-        <div class="px-1"><%= f.submit '検索', class: "btn btn-dark btn-sm px-3" %></div>
+        <div class="px-1"><%= f.submit '検索', class: "btn btn-dark btn-sm text-light px-3" %></div>
       <% end %>
     </div>
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler" >
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0 pt-3" >
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0 pt-3" >
             <% if user_signed_in? %>
               <li class="nav-item" style="width: 112px" >
-                <%= link_to(new_post_path , class: 'nav-link' , style: 'color: #494C4D' ) do %>
+                <%= link_to(new_post_path, class: 'nav-link' , style: 'color: #494C4D' ) do %>
                   <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-square-plus fa-2xl"></i></div>
                   <h6 class="text-center">新規作成</h6>
                 <% end %>
