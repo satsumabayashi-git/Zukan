@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get 'search' => 'searches#search', as: 'search'
     get 'post/bookmarked_index' => 'posts#bookmarked_index', as: 'bookmarked'
     get 'post/categorized/:category_id' => 'posts#categorized', as: 'categorized'
-    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+    resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :post_comments, only: [:create, :destroy]
       resource :bookmark, only: [:create, :destroy]
     end

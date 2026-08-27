@@ -44,16 +44,30 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:notice] = "投稿に成功しました"
+      flash[:notice] = "送信に成功しました"
       redirect_to posts_path
     else
-      flash.now[:alert] = "投稿に失敗しました"
+      flash.now[:alert] = "送信に失敗しました"
       @categorys = Category.all
       render :new
     end
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @categorys = Category.all
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:notice] = "編集に成功しました"
+      redirect_to posts_path(@post.id)
+    else
+      flash.now[:alert] = "編集に失敗しました"
+      @categorys = Category.all
+      render :edit
+    end
   end
 
   def destroy
@@ -81,7 +95,8 @@ class Public::PostsController < ApplicationController
 
   def categorized
     bookmarks = current_user.bookmarks
-    categorized_posts =  Post.where(category_id: params[:category_id])
+    @category_id = params[:category_id]
+    categorized_posts =  Post.where(category_id: @category_id)
     case params[:order]
     when "old" then
       ordered_object = categorized_posts.old
@@ -105,7 +120,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :image, :date, :place, :category_id)
+    params.require(:post).permit(:body, :image, :date, :place, :memo, :category_id)
   end
 
   # def order_params

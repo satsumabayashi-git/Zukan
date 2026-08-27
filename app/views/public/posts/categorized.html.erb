@@ -27,17 +27,17 @@
       <ul class="nav nav-pills">
         <% case params[:order] %>
         <% when "old" then %>
-          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link active" %></li>
-          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link" %> </li>
+          <li class="nav-item"><%= link_to "新着順", categorized_path(@category_id), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "古い順", categorized_path(@category_id, order: "old"), class: "nav-link active" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", categorized_path(@category_id, order: "bookmark"), class: "nav-link" %> </li>
         <% when "bookmark" then %>
-          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link active" %> </li>
+          <li class="nav-item"><%= link_to "新着順", categorized_path(@category_id), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "古い順", categorized_path(@category_id, order: "old"), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", categorized_path(@category_id, order: "bookmark"), class: "nav-link active" %> </li>
         <% else %>
-          <li class="nav-item"><%= link_to "新着順", posts_path, class: "nav-link active" %></li>
-          <li class="nav-item"><%= link_to "古い順", posts_path(order: "old"), class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "ブックマーク順", posts_path(order: "bookmark"), class: "nav-link" %> </li>
+          <li class="nav-item"><%= link_to "新着順", categorized_path(@category_id), class: "nav-link active" %></li>
+          <li class="nav-item"><%= link_to "古い順", categorized_path(@category_id, order: "old"), class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "ブックマーク順", categorized_path(@category_id, order: "bookmark"), class: "nav-link" %> </li>
         <% end %>
       </ul>
     </div>

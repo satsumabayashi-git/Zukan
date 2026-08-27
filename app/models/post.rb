@@ -8,7 +8,10 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   validates :image, presence: true
-  validates :body, presence: true
+  validates :body, presence: true, length: {maximum: 140}
+  validates :place, length: {maximum: 140}
+  validates :date, length: {maximum: 140}
+  validates :memo, length: {maximum: 140}
   # validates :category_id, presence: true
 
   scope :latest, -> {order(created_at: :desc)}
