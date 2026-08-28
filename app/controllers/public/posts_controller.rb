@@ -44,10 +44,10 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:notice] = "送信に成功しました"
+      flash[:success] = "送信に成功しました"
       redirect_to posts_path
     else
-      flash.now[:alert] = "送信に失敗しました"
+      flash.now[:danger] = "送信に失敗しました"
       @categorys = Category.all
       render :new
     end
@@ -61,10 +61,10 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:notice] = "編集に成功しました"
+      flash[:success] = "編集に成功しました"
       redirect_to posts_path(@post.id)
     else
-      flash.now[:alert] = "編集に失敗しました"
+      flash.now[:danger] = "編集に失敗しました"
       @categorys = Category.all
       render :edit
     end

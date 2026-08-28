@@ -4,10 +4,10 @@ class Public::PostCommentsController < ApplicationController
     @post_comment = current_user.post_comments.new(post_comment_params)
     @post_comment.post_id = @post.id
     if @post_comment.save
-      flash[:notice] = "コメントを送信しました"
+      flash[:success] = "コメントを送信しました"
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = "コメントを送信できませんでした"
+      flash.now[:danger] = "コメントを送信できませんでした"
       render template: 'public/posts/show'
     end
 

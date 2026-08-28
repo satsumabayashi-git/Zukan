@@ -22,7 +22,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -31,7 +31,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード（確認用）
         remember_created_at: ログイン記憶時刻
-        remember_me: ログインを記憶する
+        remember_me: ログインしたままにする
         reset_password_sent_at: パスワードリセット送信時刻
         reset_password_token: パスワードリセット用トークン
         sign_in_count: ログイン回数
@@ -57,8 +57,8 @@ ja:
         not_found: は見つかりませんでした。
         not_locked: はロックされていません。
         not_saved:
-          one: エラーが発生したため %{resource} は保存されませんでした。
-          other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+          one: エラーが発生したため %{resource} を保存できませんでした。
+          other: "%{count} 件のエラーが発生したため %{resource} を保存できませんでした。"
   date:
     abbr_day_names:
     - 日

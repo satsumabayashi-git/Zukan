@@ -22,53 +22,7 @@
     <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
     <!-- stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
 
-    <script>
-      const preview = document.getElementById("preview");
-      const fileInput = document.getElementsByClassName("upload-image");
-      
-      fileInput.addEventListener("change", previewFile);
-      
-      function DeleteCheck(type){
-        switch (type) {
-          case 'post':
-            var message = "投稿を削除しますか？";
-            break;
-          case 'comment':
-            var message = "コメントを削除しますか？";
-            break;
-          case 'logout':
-            var message = "ログアウトしますか？";
-            break;
-          case 'user':
-            var message = "アカウントを削除しますか？";
-            break;
-          default:
-        }
-
-        if(window.confirm(message)){ 
-          return true;
-        }
-        else{
-          window.alert('キャンセルされました'); 
-          return false; 
-        }
-      }
-      
-      function previewFile() {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.addEventListener("load", () => {
-          preview.style.backgroundImage = `url(${reader.result})`;
-          preview.style.width = "200px";
-          preview.style.height = "200px";
-        });
-  
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      }
-    </script>
+    
   </head>
   <body class="d-flex flex-column vh-100">
     <header>
@@ -132,7 +86,7 @@
       </nav>
     </div>
     <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %>"><%= message %></div>
+      <div class="flash-message alert alert-<%= message_type %>" role="alert"><%= message %></div>
     <% end %>
     </header>
     <main class="container-xl mb-auto">
@@ -147,5 +101,52 @@
         </div>
       </div>
     </footer>
+    <script>
+      const preview = document.getElementById("preview-area");
+      const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
+      
+      fileInput.addEventListener("change", previewFile);
+
+      function previewFile() {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+          preview.style.backgroundImage = `url(${reader.result})`;
+          preview.style.width = "200px";
+          preview.style.height = "200px";
+        });
+  
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
+      
+      function DeleteCheck(type){
+        switch (type) {
+          case 'post':
+            var message = "投稿を削除しますか？";
+            break;
+          case 'comment':
+            var message = "コメントを削除しますか？";
+            break;
+          case 'logout':
+            var message = "ログアウトしますか？";
+            break;
+          case 'user':
+            var message = "アカウントを削除しますか？";
+            break;
+          default:
+        }
+
+        if(window.confirm(message)){ 
+          return true;
+        }
+        else{
+          window.alert('キャンセルされました'); 
+          return false; 
+        }
+      }
+    </script>
   </body>
 </html>
