@@ -2,17 +2,17 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
-  belongs_to :category
+  belongs_to :category, optional: true
   has_many :post_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  validates :image, presence: true
+  validates :image, presence: {message: "を選択してください"}
   validates :body, presence: true, length: {maximum: 140}
   validates :place, length: {maximum: 140}
   validates :date, length: {maximum: 140}
   validates :memo, length: {maximum: 140}
-  # validates :category_id, presence: true
+  validates :category, presence: {message: "を選択してください"}
 
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}

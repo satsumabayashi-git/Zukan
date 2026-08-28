@@ -21,8 +21,8 @@
         <div class="col-sm py-2 ps-0"><h5><%= @user.favorite_animal %></h5></div>
       </div>
       <hr class="mt-2">
-      <div class="row mx-2">
-        <h5><%= @user.introduction %></h5>
+      <div class="row mx-2 text-center">
+        <h5><%= @user.introduction.blank? ? "-----" : @user.introduction %></h5>
       </div>
     </div>
       <% if @user == current_user %>

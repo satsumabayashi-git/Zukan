@@ -25,7 +25,7 @@
       <div class="col-md-2 py-2 ps-4"><h6>画像</h6></div>
       <div class="col-md-8">
         <%= f.label :image , "画像をアップロード", class: "btn btn-primary" %>
-        <%= f.file_field :image, accept: "image/jpeg", class: "", style: "display: none;" %>
+        <%= f.file_field :image, accept: "image/jpeg", class: "upload-image", style: "display: none;" %>
       </div>
     </div>
     <div class="p-3 mx-auto" style="width: 0px; height: 0px; background-size: contain; background-repeat: no-repeat; background-position: center;" id="preview"></div>
@@ -62,26 +62,3 @@
     </div>
   <% end %>
 </div>
-
-<script>
-  const preview = document.getElementById("preview");
-  const fileInput = document.getElementById("post_image");
-  
-  fileInput.addEventListener("change", previewFile);
-  
-  function previewFile() {
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-  
-    reader.addEventListener("load", () => {
-      // 画像ファイルを base64 文字列に変換
-      preview.style.backgroundImage = `url(${reader.result})`;
-      preview.style.width = "200px";
-      preview.style.height = "200px";
-    });
-  
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
-</script>
