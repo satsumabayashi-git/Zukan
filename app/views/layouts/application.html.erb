@@ -21,77 +21,78 @@
     <!-- <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> -->
     <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
     <!-- stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
-
     
   </head>
   <body class="d-flex flex-column vh-100">
     <header>
-    <div class="header-logo w-100 py-4 text-white" style="background-color: #FFB2B3;" >
-      <h1 class="yusei-magic-regular text-center">
-        <%= link_to "みんなのソーシャル動物図鑑", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
-      </h1>
-    </div>
-    <div class="w-100" style="background-color: #F3E2BE;">
-      <%= form_with url: search_path, local: true, method: :get, class: "form-inline py-1 mx-auto d-flex justify-content-center" do |f| %>
-        <div class="px-1 rounded"><%= f.select :range, options_for_select([["投稿", 'Post'], ["ユーザー", 'User']]) %></div>
-        <div class="px-1"><%= f.text_field :word , class: "form-control form-control-sm" %></div>
-        <div class="px-1"><%= f.submit '検索', class: "btn btn-dark btn-sm text-light px-3" %></div>
+      <div class="w-100 py-4 text-white" style="background-color: #FFB2B3;" >
+        <h1 class="yusei-magic-regular text-center">
+          <%= link_to "みんなのソーシャル動物図鑑", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
+        </h1>
+      </div>
+      <div class="w-100" style="background-color: #F3E2BE;">
+        <%= form_with url: search_path, local: true, method: :get, class: "form-inline py-1 mx-auto d-flex justify-content-center" do |f| %>
+          <div class="px-1"><%= f.select :range, options_for_select([["投稿", 'Post'], ["ユーザー", 'User']]) %></div>
+          <div class="px-1"><%= f.text_field :word , class: "form-control form-control-sm" %></div>
+          <div class="px-1"><%= f.submit '検索', class: "btn btn-dark btn-sm text-light px-3" %></div>
+        <% end %>
+      </div>
+      <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+          <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggler" >
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0 pt-3" >
+              <% if user_signed_in? %>
+                <li class="nav-item" style="width: 112px" >
+                  <%= link_to(new_post_path, class: 'nav-link', style: 'color: #494C4D;' ) do %>
+                    <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-square-plus fa-2xl"></i></div>
+                    <h6 class="text-center">新規作成</h6>
+                  <% end %>
+                </li>
+                <li class="nav-item" style="width: 112px;">
+                  <%= link_to(user_path(current_user.id) , class: 'nav-link', style: 'color: #494C4D;') do %>
+                    <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-circle-user fa-2xl"></i></div>
+                    <h6 class="text-center">マイページ</h6>
+                  <% end %>
+                </li>
+                <li class="nav-item" style="width: 112px">
+                  <%= link_to(bookmarked_path , class: 'nav-link', style: 'color: #494C4D;') do %>
+                    <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-bookmark fa-2xl"></i></div>
+                    <h6 class="text-center">ブックマーク</h6>
+                  <% end %>
+                </li>
+                <li class="nav-item d-flex justify-content-center" style="width: 112px">
+                  <%= button_to(destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, form: { onSubmit: 'return DeleteCheck("logout")' }, class: 'nav-link', style: 'border: none; color: #494C4D; background-color: #F8F9FA') do %>
+                    <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></div>
+                    <h6 class="text-center">ログアウト</h6>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "TOP", posts_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message alert alert-<%= message_type %>" role="alert"><%= message %></div>
       <% end %>
-    </div>
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler" >
-          <ul class="navbar-nav ms-auto mt-2 mt-lg-0 pt-3" >
-            <% if user_signed_in? %>
-              <li class="nav-item" style="width: 112px" >
-                <%= link_to(new_post_path, class: 'nav-link' , style: 'color: #494C4D' ) do %>
-                  <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-square-plus fa-2xl"></i></div>
-                  <h6 class="text-center">新規作成</h6>
-                <% end %>
-              </li>
-              <li class="nav-item" style="width: 112px;">
-                <%= link_to(user_path(current_user.id) , class: 'nav-link', style: 'color: #494C4D') do %>
-                  <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-circle-user fa-2xl"></i></div>
-                  <h6 class="text-center">マイページ</h6>
-                <% end %>
-              </li>
-              <li class="nav-item" style="width: 112px">
-                <%= link_to(bookmarked_path , class: 'nav-link', style: 'color: #494C4D') do %>
-                  <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-bookmark fa-2xl"></i></div>
-                  <h6 class="text-center">ブックマーク</h6>
-                <% end %>
-              </li>
-              <li class="nav-item d-flex justify-content-center" style="width: 112px">
-                <%= button_to(destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, form: { onSubmit: 'return DeleteCheck("logout")' }, class: 'nav-link', style: 'color: #494C4D; border: none; background-color: #F8F9FA') do %>
-                  <div class="mb-4 d-flex justify-content-center"><i class="fa-solid fa-arrow-right-from-bracket fa-2xl"></i></div>
-                  <h6 class="text-center">ログアウト</h6>
-                <% end %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "TOP", posts_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message alert alert-<%= message_type %>" role="alert"><%= message %></div>
-    <% end %>
     </header>
+
     <main class="container-xl mb-auto">
       <%= yield %>
     </main>
+
     <footer class="bg-dark text-white mt-5 pt-4 pb-4">
       <div class="container">
         <div class="row no-gutters">
@@ -101,11 +102,15 @@
         </div>
       </div>
     </footer>
+
     <script>
       const preview = document.getElementById("preview-area");
       const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
-      
-      fileInput.addEventListener("change", previewFile);
+
+      window.onload = function(){
+        // console.log("読み込み完了");
+        fileInput.addEventListener("change", previewFile);
+      }
 
       function previewFile() {
         const file = fileInput.files[0];
@@ -116,12 +121,12 @@
           preview.style.width = "200px";
           preview.style.height = "200px";
         });
-  
+
         if (file) {
           reader.readAsDataURL(file);
         }
       }
-      
+
       function DeleteCheck(type){
         switch (type) {
           case 'post':
@@ -137,6 +142,8 @@
             var message = "アカウントを削除しますか？";
             break;
           default:
+            var message = "○○を削除しますか？";
+            break;
         }
 
         if(window.confirm(message)){ 

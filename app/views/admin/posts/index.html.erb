@@ -1,13 +1,88 @@
-<h1>投稿一覧</h1>
-<ul>
+<h4 class="m-4 headline" style="color: #494C4D;">
+  <strong>投稿一覧</strong>
+</h4>
+
+<div class="d-flex flex-wrap justify-content-center">
   <% @posts.each do |post| %>
-    <li>
-      <%= image_tag post.get_image(200,200) %> - <%= post.body %> 
-      <%= link_to '投稿を削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-    </li>
-    <% post.post_comments.each do |post_comment| %>
-        <%= post_comment.comment %>
-        <%= link_to 'コメントを削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-    <% end %>
+  <div class="mt-4 mx-2" style="width: 250px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+    <div>
+      <%= link_to categorized_path(post.category.id) do %>
+        <button class="btn btn-info btn-sm text-light" style="width: 120px; font-size: 12px;"><%= post.category.name %></button>
+      <% end %>
+    </div>
+
+    <div class="mx-auto card rounded" style="width: 223px; background-color: #F8F9FA;">
+      <div class="card-body p-2">
+        <h6 class="mx-auto card-title text-center text-truncate text-dark" style="max-width: 215px;">
+          <%= post.body %>
+        </h6>
+        <div class="d-flex w-100" style="height: 140px;">
+          <%= link_to post_path(post.id), class: "mx-auto my-auto" do %>
+            <%= image_tag post.get_image(200,130), class: "img-thumbnail border rounded" %>
+          <% end %>
+        </div>
+
+        <div class="mt-1 mb-1 d-flex flex-row">
+          <div class="me-2">
+            <%= link_to user_path(post.user.id), class: "" do %>
+              <%= image_tag post.user.get_profile_image(25, 25), class: "border rounded-circle" %>
+            <% end %>
+          </div>
+          <h6 class="mb-0 pt-2 text-justify text-truncate" style="font-size: 12px; max-width: 150px;">
+            <%= post.user.name %>
+          </h6>
+        </div>
+          
+        <hr class="my-1" style="border-color: #494C4D;">
+
+        <div class="d-flex ps-3">
+          <div class="">
+            <%= link_to post_path(post.id), class: "d-flex flex-row me-3 text-decoration-none", style: 'color: #494C4D' do %>
+              <i class="fa-regular fa-message my-auto"></i>
+              <p class="text-dark my-0 ms-2"><%= post.post_comments.count %></p>
+            <% end %>
+          </div>
+          <div class="d-flex">
+            <% if post.bookmarked_by?(current_user) %>
+              <%= button_to(post_bookmark_path(post), method: :delete, data: { turbo_method: :delete }, class: "d-flex flex-row me-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+                <i class="fa-solid fa-bookmark my-auto"></i>
+                <p class="my-0 ms-2"><%= post.bookmarks.count %></p>
+              <% end %>
+            <% else %>
+              <%= button_to(post_bookmark_path(post), method: :post, data: { turbo_method: :post }, class: "d-flex flex-row me-3", style: 'color: #494C4D; border: none; background-color: #F8F9FA;') do %>
+                <i class="fa-regular fa-bookmark my-auto"></i>
+                <p class="my-0 ms-2"><%= post.bookmarks.count %></p>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <%= button_to(admin_post_path(post), method: :delete, form: { onSubmit: 'return DeleteCheck("post")' }, class: "btn btn-danger") do %>
+            <i class="fa-regular fa-trash-can"></i>
+            <span>投稿を削除</span>
+          <% end %>
+        </div>
+        <div>
+          <% post.post_comments.each do |post_comment| %>
+            <div class="mt-1 mb-1 d-flex flex-row">
+              <div class="me-2">
+                <%= link_to user_path(post_comment.user.id), class: "" do %>
+                  <%= image_tag post_comment.user.get_profile_image(25, 25), class: "border rounded-circle" %>
+                <% end %>
+              </div>
+              <h6 class="mb-0 pt-2 text-justify text-truncate" style="font-size: 12px; max-width: 150px;">
+                <%= post_comment.user.name %>
+              </h6>
+            </div>
+            <%= post_comment.comment %>
+            <%= button_to(admin_post_comment_path(post_comment), method: :delete, form: { onSubmit: 'return DeleteCheck("comment")' }, class: "btn btn-danger") do %>
+              <i class="fa-regular fa-trash-can"></i>
+              <span>コメントを削除</span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>

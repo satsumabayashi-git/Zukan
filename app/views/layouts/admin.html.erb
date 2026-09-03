@@ -2,17 +2,89 @@
 <html>
 <head>
   <title>Admin - Zukan</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/3006deca4b.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <meta name="turbo-cache-control" content="no-cache">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>    
 </head>
-<body>
-  <% if admin_signed_in? %>
-    <div class="text-right">
-      <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+<body class="d-flex flex-column vh-100">
+  <header>
+    <div class="w-100 py-4 text-white" style="background-color: #FFB2B3;" >
+      <h1 class="yusei-magic-regular text-center">
+        <%= link_to "みんなのソーシャル動物図鑑（管理者）", admin_dashboards_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
+      </h1>
     </div>
-  <% end %>
-  <%= yield %>
+    <div class="w-100" style="background-color: #F3E2BE;">
+      <%= form_with url: search_path, local: true, method: :get, class: "form-inline py-1 mx-auto d-flex justify-content-center" do |f| %>
+        <div class="px-1"><%= f.select :range, options_for_select([["投稿", 'Post'], ["ユーザー", 'User']]) %></div>
+        <div class="px-1"><%= f.text_field :word , class: "form-control form-control-sm" %></div>
+        <div class="px-1"><%= f.submit '検索', class: "btn btn-dark btn-sm text-light px-3" %></div>
+      <% end %>
+    </div>
+    <% if admin_signed_in? %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler" >
+        <ul class="navbar-nav ms-auto mt-2 mt-lg-0 pt-3" >
+          <li class="nav-item">
+            <%= link_to "ダッシュボード", admin_dashboards_path, class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ユーザー一覧", admin_users_path,  class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "投稿一覧", admin_posts_path,  class: 'nav-link text-dark' %>
+          </li>
+          <li class="nav-item d-flex justify-content-center" style="width: 112px">
+            <%= button_to(destroy_admin_session_path, method: :delete, data: { turbo_method: :delete }, form: { onSubmit: 'return DeleteCheck("logout")' }, class: 'nav-link', style: 'border: none; color: #494C4D; background-color: #F8F9FA') do %>
+              <h6 class="text-center">ログアウト</h6>
+            <% end %>
+          </li>
+    <% end %>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
+  <script>
+    function DeleteCheck(type){
+      switch (type) {
+        case 'post':
+          var message = "投稿を削除しますか？";
+          break;
+        case 'comment':
+          var message = "コメントを削除しますか？";
+          break;
+        case 'logout':
+          var message = "ログアウトしますか？";
+          break;
+        case 'user':
+          var message = "アカウントを削除しますか？";
+          break;
+        default:
+          var message = "○○を削除しますか？";
+          break;
+      }
+
+      if(window.confirm(message)){ 
+        return true;
+      }
+      else{
+        window.alert('キャンセルされました'); 
+        return false; 
+      }
+    }
+  </script>
 </body>
 </html>

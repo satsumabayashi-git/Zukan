@@ -123,8 +123,4 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:body, :image, :date, :place, :memo, :category_id)
   end
 
-  # def order_params
-  #   params.require(:order).permit()
-  # end
-
 end

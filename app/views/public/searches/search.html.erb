@@ -31,6 +31,6 @@
     </div>
     <%= paginate @users %>
   <% else %>
-    <%= render 'list', posts: @posts %>
+    <%= render 'public/posts/list', posts: @posts %>
   <% end %>
 </div>
