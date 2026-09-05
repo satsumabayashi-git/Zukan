@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       resource :bookmark, only: [:create, :destroy]
     end
 
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :users, only: [:show, :edit, :update, :destroy]
   end
 
 end
