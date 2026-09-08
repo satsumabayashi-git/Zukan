@@ -62,7 +62,7 @@ def create_posts_for_user_with_ordered_dates(user, count, index)
   sample_image_category = [4, 4, 3, 0, 0, 1, 4, 2, 4, 2]
 
   count.times do |i|
-    body = "投稿#{i + 1}by#{user.name}"
+    body = "テスト投稿#{i + 1}by#{user.name}"
     date = "#{rand(1..12)}月#{rand(1..31)}日"
     place = "場所#{i + 1}"
     memo = "サンプルの投稿#{i + 1}です。by#{user.name}"

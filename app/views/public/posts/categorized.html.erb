@@ -1,7 +1,7 @@
 <h4 class="m-4">
   <strong>
     <%= link_to posts_path, class: "headline text-decoration-none", style: "color: #494C4D;" do %>
-    カテゴリ検索：<%= Category.find(params[:category_id]).name %>
+    カテゴリ検索：<%= @categories.find(params[:category_id]).name %>
     <% end %>
   </strong>
 </h4>
@@ -14,7 +14,7 @@
         カテゴリ検索
       </button>
       <ul class="dropdown-menu">
-        <% Category.all.each do |category| %>
+        <% @categories.each do |category| %>
           <li>
             <%= link_to "#{category.name}", categorized_path(category.id), class: "dropdown-item" %>
           </li>

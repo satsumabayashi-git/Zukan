@@ -1,10 +1,11 @@
 class Public::PostsController < ApplicationController
   def new
     @post = Post.new
-    @categorys = Category.all
+    @categories = Category.all
   end
 
   def index
+    @categories = Category.all
     case params[:order]
     when "old" then
       ordered_object = Post.old
@@ -14,25 +15,6 @@ class Public::PostsController < ApplicationController
       ordered_object = Post.latest
     end
     @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
-
-    # case params[:order]
-    # when "old" then
-    #   @posts = Post.old.page(params[:page])
-    # when "bookmark" then
-    #   my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
-    #   @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
-    # else
-    #   @posts = Post.latest.page(params[:page])
-    # end
-    
-    # if  params[:old]
-    #   @posts = Post.old.page(params[:page])
-    # elsif params[:bookmark_count]
-    #   my_array_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
-    #   @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
-    # else
-    #   @posts = Post.latest.page(params[:page])
-    # end
   end
 
   def show
@@ -48,14 +30,14 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path
     else
       flash.now[:danger] = "送信に失敗しました"
-      @categorys = Category.all
+      @categories = Category.all
       render :new
     end
   end
 
   def edit
     @post = Post.find(params[:id])
-    @categorys = Category.all
+    @categories = Category.all
   end
 
   def update
@@ -65,7 +47,7 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path(@post.id)
     else
       flash.now[:danger] = "編集に失敗しました"
-      @categorys = Category.all
+      @categories = Category.all
       render :edit
     end
   end
@@ -79,21 +61,12 @@ class Public::PostsController < ApplicationController
   def bookmarked_index
     bookmarks = current_user.bookmarks
     bookmarked_posts = Post.where(id: [bookmarks.pluck(:post_id)])
-    # case params[:order]
-    # when "latest" then
-    #   my_array_object =  bookmarked_posts.latest
-    # when "old" then
-    #   my_array_object =  bookmarked_posts.old
-    # when "bookmarked_old" then
-    #   my_array_object = bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }
-    # else
-    #   my_array_object = bookmarked_posts.sort_by { |post| bookmarks.find_by(post_id: post.id).created_at }.reverse
-    # end
     my_array_object =  bookmarked_posts
     @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
   end
 
   def categorized
+    @categories = Category.all
     bookmarks = current_user.bookmarks
     @category_id = params[:category_id]
     categorized_posts =  Post.where(category_id: @category_id)
@@ -106,15 +79,6 @@ class Public::PostsController < ApplicationController
       ordered_object = categorized_posts.latest
     end
     @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
-
-    # if params[:old]
-    #   my_array_object =  categorized_posts.old
-    # elsif params[:bookmark_count]
-    #   my_array_object =  categorized_posts.sort_by { |post| post.bookmarks.count }.reverse!
-    # else
-    #   my_array_object =  categorized_posts.latest
-    # end
-    # @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
   end
 
   private

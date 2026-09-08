@@ -1,2 +1,71 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h4 class="m-4">
+  <strong><%= link_to "TOPページ", posts_path, class: "headline text-decoration-none", style: "color: #494C4D;" %></strong>
+</h4>
+
+<div class="container-xl">
+  <div id="top-carousel" class="carousel slide mx-auto border shadow" data-bs-ride="carousel" style="max-width: 600px;">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= link_to post_path(@posts.first.id), class: "mx-auto my-auto" do %>
+          <%= image_tag @posts.first.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+        <% end %>
+      </div>
+      <div class="carousel-item">
+        <%= link_to post_path(@posts.second.id), class: "mx-auto my-auto" do %>
+          <%= image_tag @posts.second.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+        <% end %>
+      </div>
+      <div class="carousel-item">
+        <%= link_to post_path(@posts.third.id), class: "mx-auto my-auto" do %>
+          <%= image_tag @posts.third.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#top-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#top-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end mt-3 mb-5" >
+    <%= link_to "すべての投稿を見る", posts_path %>
+  </div>
+  <% @categories.each do |category|%>
+    <% posts = @posts.where(category_id: category.id) %>
+    <div class="my-5">
+      <div class="ms-3 me-auto mb-2" style="max-width: 200px;" >
+        <%= link_to categorized_path(category.id) do %>
+          <button class="btn btn-info text-light w-100"><%= category.name %></button>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-around flex-wrap">
+        <% if posts.first %>
+          <%= link_to post_path(posts.first.id) do %>
+            <%= image_tag posts.first.get_fill_image(300,200), class: "img-thumbnail border rounded" %>
+          <% end %>
+        <% end %>
+        <% if posts.second %>
+          <%= link_to post_path(posts.second.id) do %>
+            <%= image_tag posts.second.get_fill_image(300,200), class: "img-thumbnail border rounded" %>
+          <% end %>
+        <% end %>
+        <% if posts.third %>
+          <%= link_to post_path(posts.third.id) do %>
+            <%= image_tag posts.third.get_fill_image(300,200), class: "img-thumbnail border rounded" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-end mt-3 mb-5" >
+        <%= link_to "#{category.name}の投稿を見る", categorized_path(category.id) %>
+      </div>
+    </div>
+  <% end %>
+</div>

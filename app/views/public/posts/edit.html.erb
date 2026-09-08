@@ -30,7 +30,7 @@
     <div class="row mt-3">
       <div class="col-md-2 py-2 ps-4"><h6>カテゴリー</h6></div>
       <div class="col-md-8">
-        <% @categorys.each do |category| %>
+        <% @categories.each do |category| %>
           <div class="" style="width: 128">
             <%= f.radio_button :category_id, :"#{category.id}" %>
             <%= f.label :category_id, "#{category.name}", value: :"#{category.id}" %>

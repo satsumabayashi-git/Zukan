@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   scope module: :public do
     devise_for :users
     root to: 'homes#top'
-    get 'home/about' => 'homes#about', as: 'about'
     get 'home/test' => 'homes#test'
     get 'search' => 'searches#search', as: 'search'
     get 'post/bookmarked_index' => 'posts#bookmarked_index', as: 'bookmarked'
