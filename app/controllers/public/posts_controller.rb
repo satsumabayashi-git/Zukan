@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+
   def new
     @post = Post.new
     @categories = Category.all
@@ -85,6 +87,14 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body, :image, :date, :place, :memo, :category_id)
+  end
+
+  def is_matching_login_user
+    post = Post.find(params[:id])
+    user = post.user
+    unless user.id == current_user.id
+      redirect_to posts_path
+    end
   end
 
 end

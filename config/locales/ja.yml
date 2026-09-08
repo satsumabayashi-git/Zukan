@@ -11,7 +11,7 @@ ja:
       models:
         user: ユーザー
       user:
-        name: 名前
+        name: ニックネーム
         activated: アクティブフラグ
         admin: 管理者フラグ
         
