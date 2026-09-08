@@ -14,8 +14,10 @@ Category.all.destroy_all
 # カテゴリ作成
 categories = ["鳥類", "哺乳類", "爬虫類・両生類", "魚類・水中の生物", "昆虫・その他の虫", "不明"]
 
-categories.each_with_index do |name|
-  Category.find_or_create_by!(name: name)
+categories.each_with_index do |name, index|
+  Category.find_or_create_by!(name: name) do |c|
+    c.id = index
+  end
 end
 
 # ユーザー作成
