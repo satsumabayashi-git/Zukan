@@ -9,14 +9,14 @@
 puts "seedの実行を開始"
 
 User.where("email LIKE?", "%@example.seed.com").destroy_all
-# Category.all.destroy_all
+Category.all.destroy_all
 
-# # カテゴリ作成
-# categories = ["鳥類", "哺乳類", "爬虫類・両生類", "魚類・水中の生物", "昆虫・その他の虫", "不明"]
+# カテゴリ作成
+categories = ["鳥類", "哺乳類", "爬虫類・両生類", "魚類・水中の生物", "昆虫・その他の虫", "不明"]
 
-# categories.each_with_index do |name|
-#   Category.find_or_create_by!(name: name)
-# end
+categories.each_with_index do |name|
+  Category.find_or_create_by!(name: name)
+end
 
 # ユーザー作成
 names = ["かぶと丸", "はむたろう", "白狼", "ベッカム", "ワニくん"]
