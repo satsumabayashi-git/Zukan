@@ -27,7 +27,7 @@
     <header>
       <div class="w-100 py-4 text-white" style="background-color: #FFB2B3;" >
         <h1 class="yusei-magic-regular text-center">
-          <%= link_to "いきもの掲示板　3", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
+          <%= link_to "いきもの掲示板　5", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
         </h1>
       </div>
       <div class="w-100" style="background-color: #F3E2BE;">
@@ -104,6 +104,31 @@
     </footer>
 
     <script>
+      /*
+      window.onload = function(){
+        const preview = document.getElementById("preview-area");
+        const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
+
+        console.log("読み込み完了");
+        fileInput.addEventListener("change", previewFile);
+
+        function previewFile() {
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+  
+          reader.addEventListener("load", () => {
+            preview.style.backgroundImage = `url(${reader.result})`;
+            preview.style.width = "200px";
+            preview.style.height = "200px";
+          });
+  
+          if (file) {
+            reader.readAsDataURL(file);
+          }
+        }
+      }
+        */
+
       document.addEventListener("turbo:load", function() {
         const preview = document.getElementById("preview-area");
         const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
@@ -126,6 +151,7 @@
           }
         }
       })
+      
 
       function DeleteCheck(type){
         switch (type) {

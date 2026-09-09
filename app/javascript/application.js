@@ -10,3 +10,7 @@ import "controllers"
 
 // import "./files/test"
 // import "test"
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   sayHello("Rails 7");
+// });

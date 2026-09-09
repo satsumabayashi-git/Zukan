@@ -1,3 +1,6 @@
+alert("test.js読み込み");
+
+
 const preview = document.getElementById("preview-area");
 const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
 

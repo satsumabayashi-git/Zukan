@@ -29,18 +29,27 @@
       </div>
     </div>    
     <div class="d-flex justify-content-center">
-      <img src="" class="p-3 mx-auto rounded-circle" style="width: 0px; height: 0px; background-size: cover; background-repeat: no-repeat; background-position: center;" id="preview-area">
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-3 py-2 ps-4"><h6>自己紹介</h6></div>
-      <div class="col-md-8">
-        <%= f.text_area :introduction, autofocus: true, class: "form-control", placeholder:"自己紹介" %>
-      </div>
+      <!-- <%= image_tag @user.get_profile_image(200,200), class: "p-3 mx-auto rounded-circle" %> -->
+      <!-- <img src="<%= url_for(@user.get_profile_image(200,200)) %>" class="p-3 mx-auto rounded-circle" id="preview-area"> -->
+      <div class="p-3 mx-auto rounded-circle"
+      style="width: 200px; 
+            height: 200px; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+            background-image: url(<%= url_for(@user.get_profile_image(200,200)) %>)" 
+      id="preview-area"></div>
     </div>
     <div class="row mt-3">
       <div class="col-md-3 py-2 ps-4"><h6>好きな動物</h6></div>
       <div class="col-md-8">
         <%= f.text_field :favorite_animal, autofocus: true, class: "form-control", placeholder:"好きな動物" %>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 py-2 ps-4"><h6>自己紹介</h6></div>
+      <div class="col-md-8">
+        <%= f.text_area :introduction, autofocus: true, class: "form-control", placeholder:"自己紹介" %>
       </div>
     </div>
     <div class="row justify-content-center mx-auto mt-3 mb-3">
