@@ -33,7 +33,7 @@ class Public::PostsController < ApplicationController
     else
       flash.now[:danger] = "送信に失敗しました"
       @categories = Category.all
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -50,7 +50,7 @@ class Public::PostsController < ApplicationController
     else
       flash.now[:danger] = "編集に失敗しました"
       @categories = Category.all
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
