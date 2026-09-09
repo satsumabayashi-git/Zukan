@@ -27,7 +27,7 @@
     <header>
       <div class="w-100 py-4 text-white" style="background-color: #FFB2B3;" >
         <h1 class="yusei-magic-regular text-center">
-          <%= link_to "いきもの掲示板", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
+          <%= link_to "いきもの掲示板　１", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
         </h1>
       </div>
       <div class="w-100" style="background-color: #F3E2BE;">
@@ -104,11 +104,12 @@
     </footer>
 
     <script>
-      const preview = document.getElementById("preview-area");
-      const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
-
+      // document.addEventListener("turbolinks:load", function() {}
       window.onload = function(){
-        // console.log("読み込み完了");
+        const preview = document.getElementById("preview-area");
+        const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
+
+        console.log("読み込み完了");
         fileInput.addEventListener("change", previewFile);
       }
 
