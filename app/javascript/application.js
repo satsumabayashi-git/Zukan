@@ -5,12 +5,9 @@
 
 import "@hotwired/turbo-rails"
 import "controllers"
-// import * as ActiveStorage from "@rails/activestorage"
 
 import "./files/image_preview"
-// import "./files/confirm"
 import "test"
+// import "./files/confirm"
 
 // console.log("xxx");
-// ActiveStorage.start();
-
