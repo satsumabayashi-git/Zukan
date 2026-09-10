@@ -1,4 +1,5 @@
 // alert("test.js読み込み");
+console.log("confirm読み込み");
 
 // function DeleteCheck(type){
 //   switch (type) {
