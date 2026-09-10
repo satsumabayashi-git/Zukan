@@ -9,7 +9,7 @@ import "controllers"
 
 import "./files/image_preview"
 // import "./files/confirm"
-// import "test"
+import "test"
 
 // console.log("xxx");
 // ActiveStorage.start();
