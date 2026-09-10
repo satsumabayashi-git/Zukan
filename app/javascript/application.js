@@ -6,8 +6,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "test"
-import "files/confirm"
+// import "test"
+// import "files/confirm"
 import "files/image_preview"
 
 

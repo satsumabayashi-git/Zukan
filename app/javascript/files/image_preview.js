@@ -1,4 +1,4 @@
-// alert("test.js読み込み");
+// alert("image_preview読み込み");
 
 document.addEventListener("turbo:load", function() {
   const preview = document.getElementById("preview-area");
