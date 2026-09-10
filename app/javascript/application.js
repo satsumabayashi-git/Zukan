@@ -5,12 +5,12 @@
 
 import "@hotwired/turbo-rails"
 import "controllers"
-// import "@popperjs/core"
-// import "bootstrap"
+// import * as ActiveStorage from "@rails/activestorage"
 
-// import "./files/test"
+import "./files/image_preview"
+// import "./files/confirm"
 // import "test"
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   sayHello("Rails 7");
-// });
+// console.log("xxx");
+// ActiveStorage.start();
+
