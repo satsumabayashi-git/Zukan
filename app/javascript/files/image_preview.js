@@ -4,7 +4,7 @@ document.addEventListener("turbo:load", function() {
   const preview = document.getElementById("preview-area");
   const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
 
-  console.log("読み込み完了");
+  // console.log("読み込み完了");
   fileInput.addEventListener("change", previewFile);
 
   function previewFile() {
