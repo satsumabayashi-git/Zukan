@@ -7,8 +7,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 import "test"
-import "./files/confirm"
-import "./files/image_preview"
+import "files/confirm"
+import "files/image_preview"
 
 
 // console.log("xxx");
