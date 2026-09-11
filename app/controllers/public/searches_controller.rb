@@ -1,5 +1,4 @@
 class Public::SearchesController < ApplicationController
-
   def search
     @range = params[:range]
     @word = params[:word]
@@ -11,5 +10,4 @@ class Public::SearchesController < ApplicationController
       @posts = Kaminari.paginate_array(my_array_object).page(params[:page])
     end
   end
-  
 end

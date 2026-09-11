@@ -13,8 +13,8 @@ class Post < ApplicationRecord
   validates :memo, length: {maximum: 140}
   validates :category, presence: {message: "を選択してください"}
 
-  scope :latest, -> {order(created_at: :desc)}
-  scope :old, -> {order(created_at: :asc)}
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
   # scope :order_by_bookmark_count -> {joins(:bookmarks).order(bookmarks.count: :)  all.sort_by { |post| post.bookmarks.count }.reverse!}
 
   def get_image(width, height)
@@ -40,5 +40,4 @@ class Post < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id) if user.present?
   end
-
 end

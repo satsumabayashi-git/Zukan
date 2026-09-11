@@ -69,9 +69,9 @@ class Public::PostsController < ApplicationController
 
   def categorized
     @categories = Category.all
-    bookmarks = current_user.bookmarks
+    current_user.bookmarks
     @category_id = params[:category_id]
-    categorized_posts =  Post.where(category_id: @category_id)
+    categorized_posts = Post.where(category_id: @category_id)
     ordered_object = case params[:order]
                      when "old"
                        categorized_posts.old
@@ -94,5 +94,4 @@ class Public::PostsController < ApplicationController
     user = post.user
     redirect_to posts_path unless user.id == current_user.id
   end
-
 end

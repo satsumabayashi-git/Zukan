@@ -19,5 +19,4 @@ class ApplicationController < ActionController::Base
   def action_is_public?
     controller_name == 'posts' && ['index', 'show'].include?(action_name)
   end
-
 end

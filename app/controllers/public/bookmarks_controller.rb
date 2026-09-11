@@ -1,5 +1,4 @@
 class Public::BookmarksController < ApplicationController
-
   def create
     post = Post.find(params[:post_id])
     bookmark = current_user.bookmarks.new(post_id: post.id)
@@ -13,5 +12,4 @@ class Public::BookmarksController < ApplicationController
     bookmark.destroy
     redirect_back_or_to(post_path(post.id))
   end
-
 end

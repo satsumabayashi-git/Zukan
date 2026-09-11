@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
-  
+
   def index
     @users = User.all
   end
@@ -26,7 +26,7 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = '退会が完了しました。'
     redirect_to root_path
@@ -42,5 +42,4 @@ class Public::UsersController < ApplicationController
     user = User.find(params[:id])
     redirect_to posts_path unless user.id == current_user.id
   end
-
 end

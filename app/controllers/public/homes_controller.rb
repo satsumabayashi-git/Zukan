@@ -9,5 +9,4 @@ class Public::HomesController < ApplicationController
   # end
 
   def test; end
-  
 end
