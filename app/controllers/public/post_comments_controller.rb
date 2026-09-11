@@ -8,7 +8,7 @@ class Public::PostCommentsController < ApplicationController
       redirect_to post_path(@post.id)
     else
       flash.now[:danger] = "コメントを送信できませんでした"
-      render template: 'public/posts/show'
+      render template: 'public/posts/show', status: :unprocessable_entity
     end
 
     # post = Post.find(params[:post_id])

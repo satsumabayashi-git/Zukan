@@ -5,8 +5,10 @@
 
 import "@hotwired/turbo-rails"
 import "controllers"
-// import "@popperjs/core"
-// import "bootstrap"
 
-// import "./files/test"
 // import "test"
+// import "files/confirm"
+import "files/image_preview"
+
+
+// console.log("xxx");

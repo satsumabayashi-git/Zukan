@@ -13,21 +13,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
-    <meta name="turbo-cache-control" content="no-cache">
+    <!-- <meta name="turbo-cache-control" content="no-cache"> -->
+    <!-- <meta name="turbo-cache-control" content="no-preview"> -->
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <!-- <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> -->
     <%= javascript_importmap_tags %>
-    <!-- <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %> -->
-    <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
-    <!-- stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
-    
+
   </head>
   <body class="d-flex flex-column vh-100">
     <header>
       <div class="w-100 py-4 text-white" style="background-color: #FFB2B3;" >
         <h1 class="yusei-magic-regular text-center">
-          <%= link_to "いきもの掲示板", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
+          <%= link_to "いきもの掲示板　12", posts_path, class: 'yusei-magic-regular text-center text-white text-decoration-none' %>
         </h1>
       </div>
       <div class="w-100" style="background-color: #F3E2BE;">
@@ -102,31 +99,7 @@
         </div>
       </div>
     </footer>
-
     <script>
-      const preview = document.getElementById("preview-area");
-      const fileInput = document.getElementById("post_image") || document.getElementById("user_profile_image");
-
-      window.onload = function(){
-        // console.log("読み込み完了");
-        fileInput.addEventListener("change", previewFile);
-      }
-
-      function previewFile() {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.addEventListener("load", () => {
-          preview.style.backgroundImage = `url(${reader.result})`;
-          preview.style.width = "200px";
-          preview.style.height = "200px";
-        });
-
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      }
-
       function DeleteCheck(type){
         switch (type) {
           case 'post':
@@ -145,7 +118,7 @@
             var message = "○○を削除しますか？";
             break;
         }
-
+      
         if(window.confirm(message)){ 
           return true;
         }
