@@ -4,14 +4,14 @@ class Public::BookmarksController < ApplicationController
     post = Post.find(params[:post_id])
     bookmark = current_user.bookmarks.new(post_id: post.id)
     bookmark.save
-    redirect_back fallback_location: post_path(post.id)
+    redirect_back_or_to(post_path(post.id))
   end
 
   def destroy
     post = Post.find(params[:post_id])
     bookmark = current_user.bookmarks.find_by(post_id: post.id)
     bookmark.destroy
-    redirect_back fallback_location: post_path(post.id)
+    redirect_back_or_to(post_path(post.id))
   end
 
 end

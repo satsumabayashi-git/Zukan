@@ -16,7 +16,6 @@ class Public::PostCommentsController < ApplicationController
     # post_comment.post_id = post.id
     # post_comment.save
     # redirect_to post_path(post.id)
-
   end
 
   def destroy

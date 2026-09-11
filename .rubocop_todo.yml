@@ -78,7 +78,6 @@ Layout/EmptyLinesAroundClassBody:
     - 'app/controllers/public/users_controller.rb'
     - 'app/models/post.rb'
     - 'app/models/post_comment.rb'
-    - 'app/models/vote.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).

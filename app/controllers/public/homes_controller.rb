@@ -8,7 +8,6 @@ class Public::HomesController < ApplicationController
   #   @post = Post.find(1)
   # end
 
-  def test
-  end
+  def test; end
   
 end

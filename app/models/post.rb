@@ -5,7 +5,6 @@ class Post < ApplicationRecord
   belongs_to :category, optional: true
   has_many :post_comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :votes, dependent: :destroy
 
   validates :image, presence: {message: "を選択してください"}
   validates :body, presence: true, length: {maximum: 140}

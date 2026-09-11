@@ -1,27 +1,32 @@
 class Public::PostsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
-  def new
-    @post = Post.new
-    @categories = Category.all
-  end
-
   def index
     @categories = Category.all
-    case params[:order]
-    when "old" then
-      ordered_object = Post.old
-    when "bookmark" then
-      ordered_object = Post.all.sort_by { |post| post.bookmarks.count }.reverse!
-    else
-      ordered_object = Post.latest
-    end
+    ordered_object = case params[:order]
+                     when "old"
+                       Post.old
+                     when "bookmark"
+                       Post.all.sort_by { |post| post.bookmarks.count }.reverse!
+                     else
+                       Post.latest
+                     end
     @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
   end
 
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+  end
+
+  def new
+    @post = Post.new
+    @categories = Category.all
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+    @categories = Category.all
   end
 
   def create
@@ -35,11 +40,6 @@ class Public::PostsController < ApplicationController
       @categories = Category.all
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-    @categories = Category.all
   end
 
   def update
@@ -72,14 +72,14 @@ class Public::PostsController < ApplicationController
     bookmarks = current_user.bookmarks
     @category_id = params[:category_id]
     categorized_posts =  Post.where(category_id: @category_id)
-    case params[:order]
-    when "old" then
-      ordered_object = categorized_posts.old
-    when "bookmark" then
-      ordered_object = categorized_posts.all.sort_by { |post| post.bookmarks.count }.reverse!
-    else
-      ordered_object = categorized_posts.latest
-    end
+    ordered_object = case params[:order]
+                     when "old"
+                       categorized_posts.old
+                     when "bookmark"
+                       categorized_posts.all.sort_by { |post| post.bookmarks.count }.reverse!
+                     else
+                       categorized_posts.latest
+                     end
     @posts = Kaminari.paginate_array(ordered_object).page(params[:page])
   end
 
@@ -92,9 +92,7 @@ class Public::PostsController < ApplicationController
   def is_matching_login_user
     post = Post.find(params[:id])
     user = post.user
-    unless user.id == current_user.id
-      redirect_to posts_path
-    end
+    redirect_to posts_path unless user.id == current_user.id
   end
 
 end
