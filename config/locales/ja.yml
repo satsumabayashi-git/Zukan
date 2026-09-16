@@ -45,6 +45,8 @@ ja:
         # date: 日時
         # place: 場所
         # memo: メモ
+      post_comment:
+        comment: コメント
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
