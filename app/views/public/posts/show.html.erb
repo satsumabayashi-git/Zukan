@@ -4,7 +4,7 @@
 
 
 <div class="">
-  <div class="mt-4 mx-2" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+  <div class="mt-4 mx-2" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" id="post-detail">
     <div class="d-flex flex-wrap">
       <div class="col ps-0"  style="max-width: 300px;" >
         <%= link_to categorized_path(@post.category.id) do %>
@@ -97,7 +97,7 @@
   </div>
 
   <!-- 返信一覧 -->
-  <div class="mt-5">
+  <div class="mt-5" id="comments">
     <% @post.post_comments.each do |post_comment| %>
       <div class="mb-3">
         <div class="mt-1 mb-1 mx-1 d-flex flex">

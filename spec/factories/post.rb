@@ -2,9 +2,9 @@ FactoryBot.define do
   factory :post do
     # id { 0 }
     # user_id { rand(100..105) }
-    user_id { rand(1000..1005) }
+    user_id { rand(1..5) }
     # user_id { 1 }
-    category_id { rand(1000..1005) }
+    category_id { rand(0..5) }
     body { Faker::Lorem.characters(number:20) }
     date { Faker::Date.backward(days: 365) }
     place { Faker::Travel::TrainStation.name(region: 'united_states') }

@@ -3,38 +3,40 @@
 </h4>
 
 <div class="container-xl">
-  <div id="top-carousel" class="carousel slide mx-auto border shadow" data-bs-ride="carousel" style="max-width: 600px;">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <% if @posts.count >= 3 %>
+    <div id="top-carousel" class="carousel slide mx-auto border shadow" data-bs-ride="carousel" style="max-width: 600px;">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#top-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= link_to post_path(@posts.first.id), class: "mx-auto my-auto" do %>
+            <%= image_tag @posts.first.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+          <% end %>
+        </div>
+        <div class="carousel-item">
+          <%= link_to post_path(@posts.second.id), class: "mx-auto my-auto" do %>
+            <%= image_tag @posts.second.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+          <% end %>
+        </div>
+        <div class="carousel-item">
+          <%= link_to post_path(@posts.third.id), class: "mx-auto my-auto" do %>
+            <%= image_tag @posts.third.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
+          <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#top-carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#top-carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <%= link_to post_path(@posts.first.id), class: "mx-auto my-auto" do %>
-          <%= image_tag @posts.first.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
-        <% end %>
-      </div>
-      <div class="carousel-item">
-        <%= link_to post_path(@posts.second.id), class: "mx-auto my-auto" do %>
-          <%= image_tag @posts.second.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
-        <% end %>
-      </div>
-      <div class="carousel-item">
-        <%= link_to post_path(@posts.third.id), class: "mx-auto my-auto" do %>
-          <%= image_tag @posts.third.get_fill_image(600,400), class: "img-thumbnail border rounded d-block w-100" %>
-        <% end %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#top-carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#top-carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
+  <% end %>
   <div class="d-flex justify-content-end mt-3 mb-5" >
     <%= link_to "すべての投稿を見る", posts_path %>
   </div>
