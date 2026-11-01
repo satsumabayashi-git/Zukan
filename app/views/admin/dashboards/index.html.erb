@@ -1,3 +1,16 @@
 <h4 class="m-4 headline" style="color: #494C4D;">
   <strong>管理者ダッシュボード</strong>
 </h4>
+
+<div class="d-flex flex-wrap justify-content-center mt-5">
+  <div class="me-5">
+    <%= link_to admin_users_path do %>
+      <h1>ユーザー数： <%= @users_count %></h1>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_posts_path do %>
+      <h1>投稿数： <%= @posts_count %></h1>
+    <% end %>
+  </div>
+</div>
