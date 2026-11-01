@@ -21,9 +21,10 @@
 それに伴い、Railsのアップデート(6.1 → 7.0)を行いました。
 
 ## 反省点と今後の課題
-テーマで迷走、アプリの方向性を決めるべきだった
-見た目にこだわるとキリがないとはいえ画面がシンプルすぎ、画面の見た目やアニメーションを工夫する余地があった
-デプロイに手一杯でAWSの他の機能を活用できなかった、特にストレージ機能を実装したい
+- 実装すべき機能を絞り込めず、特徴に欠けるアプリケーションとなった。最初にアプリの方向性を決め、ターゲットユーザーを明確にする必要があった。
+- 見た目にこだわるとキリがないと感じたため画面をシンプルにまとめたが、画面の質感やアニメーションは工夫する余地があった。UI/UXについて学習したい。
+- デプロイに手一杯でAWSの機能を活用できなかった。特に画像ファイルを扱うにあたり、S3は利用すべきだった。
+- デプロイ後に手動で何度も修正して再デプロイをする非効率さを実感したので、CI/CDを導入したい。
 ​
 ## 開発環境
 - OS： Windows, Ubuntu
@@ -41,6 +42,6 @@
 - 写真AC
 
 ## 設計書
-- ER図：https://drive.google.com/file/d/16bf4MvgjYSpM3mfgn5MDS9HV-OgtP0JP/view?usp=drive_link
-- UIFlows：https://drive.google.com/file/d/1Lf4FRIQ1mA2k2eYtW5ngxovmxTgxB8pb/view?usp=drive_link
-- アプリケーション詳細設計書：https://docs.google.com/spreadsheets/d/1-x2HTD88kHMjN3m_qiLWZNKTJvGvyXAZ1Y_fpeMa6Fw/edit?usp=drive_link
+- ER図：https://drive.google.com/file/d/1FPUeg3Yy38Ax06hUtRAeRjxOW845N0Eq/view?usp=sharing
+- UIFlows：https://drive.google.com/file/d/1p-7iQLqCLVAoPXS4zxosTJErxXphhjO8/view?usp=sharing
+- アプリケーション詳細設計書：https://docs.google.com/spreadsheets/d/1lGhlJQbRXk66gI4qcmguzXhn0RFjN8yN/edit?usp=sharing&ouid=109413690513704898064&rtpof=true&sd=true
